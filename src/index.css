@@ -11,6 +11,8 @@ body {
   font-family:'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Apartir de acá es del login */
   display: flex;
   justify-content: center;
   align-items: center;
