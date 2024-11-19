@@ -1,8 +1,9 @@
-
-import LoginForm from './Components/LoginForm/LoginForm';
-
 //Import de para poder usar las funciones de React Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
+
+//Importaciones de todas las pages a utilizar
+import AdminPage from './Pages/AdminPage/AdminPage';
+import LoginPage from './Pages/LoginPage/LoginPage';
 
 function App() {
   return (
@@ -13,7 +14,11 @@ function App() {
         <Routes>
           
           {/* Cada ruta singular estara dentro de Route */}
-          <Route path="/" element={<LoginForm/>} />
+          <Route path="/" element={<LoginPage />} />
+
+          {/* <Route element={<LoginPage />}>
+            <Route path="/main-menu" element={<AdminPage />}/>
+          </Route > */}
         </Routes>
       </BrowserRouter>
     </div>
