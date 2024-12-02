@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 60px; /* Espacio entre la imagen y el formulario */
+    margin-bottom: 30px; /* Espacio entre la imagen y el formulario */
 }
 
 .image-container img {
@@ -35,9 +35,10 @@
     width: 100%;
     max-width: 420px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    /* border: 2px solid rgba(255, 255, 255, 0.2); */
+    border: 2px solid #EE952480;
     backdrop-filter: blur(30px);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px #EE952480;
     color: aliceblue;
     border-radius: 10px;
     padding: 30px 40px;
@@ -63,7 +64,8 @@
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    /* border: 2px solid rgba(255, 255, 255, 0.2); */
+    border: 2px solid #EE952480;
     border-radius: 40px;
     font-size: 16px;
     color: aliceblue;
@@ -123,6 +125,11 @@
     margin-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.wrapper button:hover{
+    background: #f3ab03;
+    color: #242C42;
 }
 
 /* Estilos responsivos */

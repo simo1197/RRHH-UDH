@@ -1,12 +1,13 @@
 import React from 'react'; 
 import './LoginForm.css'; //importar el CSS para LoginForm
 import { FaUser, FaLock } from "react-icons/fa6"; //import de icono de react
+import imgLogo from '../../Assets/udhogobco.png';
 
 const LoginForm = () => {
     return (
         <div class="wrapper-container">
     <div class="image-container">
-        <img src="Assets/udhogobco.png" alt="Imagen de Login" class="login-image" />
+        <img src={imgLogo} alt="Imagen de Login" class="login-image" />
     </div>
     <div class="wrapper">
         <form action=''>
@@ -25,8 +26,8 @@ const LoginForm = () => {
             <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
- </div>
- 
+</div>
+
     );
 };
 
