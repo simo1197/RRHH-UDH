@@ -1,12 +1,11 @@
 import React from "react";
 import Layout from "../../Layouts/Layout";
-
-const AdminPage = () => {
+const UserPage = () => {
     return(
-        <Layout userType="user">
-
+        <Layout>
+            <b>Estoy en UserPage</b>
         </Layout>
     )
 }
 
-export default AdminPage;
+export default UserPage;

@@ -1,12 +1,14 @@
 import React from "react";
 import Sidebar from "../Components/Sidebar/Sidebar";
+import AdminPage from "../Pages/AdminPage/AdminPage";
+import UserPage from "../Pages/UserPage/UserPage";
 
-function Layout(props){
+const Layout = ({children}) => {
 
     const moduleRender = {
         'abcs': Sidebar,
-        'abc': 'pageModule_User',
-        'xd': 'pageModule_Admin',
+        'admin': ()=>{return <AdminPage />},
+        'user': ()=>{return <UserPage />},
         'pxdd': 'pageModule_Servicio'
     }
 
@@ -14,6 +16,7 @@ function Layout(props){
         <div>
             <Sidebar />
             {/* {moduleRender[props.role]} */}
+            {children} 
         </div>
     )
 }

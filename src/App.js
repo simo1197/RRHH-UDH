@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //Importaciones de todas las pages a utilizar
 import AdminPage from './Pages/AdminPage/AdminPage';
+import UserPage from './Pages/UserPage/UserPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 
 function App() {
@@ -15,10 +16,9 @@ function App() {
           
           {/* Cada ruta singular estara dentro de Route */}
           <Route path="/" element={<LoginPage />} />
-
-          {/* <Route element={<LoginPage />}>
-            <Route path="/main-menu" element={<AdminPage />}/>
-          </Route > */}
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/user" element={<UserPage />} />
+          
         </Routes>
       </BrowserRouter>
     </div>
