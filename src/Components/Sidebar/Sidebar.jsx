@@ -1,19 +1,20 @@
-import React from 'react'; 
-import './Sidebar.css'; 
+
+import React from "react";
+import './Sidebar.css';
 
 const Sidebar = () => {
-    return (
-        <div className="sidebar">
-        <h2>Mi Sidebar</h2>
-        {/* Agrega aquí enlaces o cualquier otro contenido */}
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Configuración</a></li>
-            <li><a href="#">Cerrar sesión</a></li>
-        </ul>
-    </div> 
-
+    return(
+        <aside>
+            <ul>
+                <li>Personal</li>
+                <li>Servicio</li>
+                <li>Evaluaciones</li>
+                <li>Permisos y Vacaciones</li>
+                <li>Bibllioteca</li>
+                <li>Bitácora</li>
+            </ul>
+        </aside>
     );
-};
+}
 
 export default Sidebar;

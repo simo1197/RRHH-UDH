@@ -2,8 +2,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 
 //Importaciones de todas las pages a utilizar
-import AdminPage from './pages/AdminPage/AdminPage';
-import LoginPage from './pages/LoginPage/LoginPage';
+
+import AdminPage from './Pages/AdminPage/AdminPage';
+import UserPage from './Pages/UserPage/UserPage';
+import LoginPage from './Pages/LoginPage/LoginPage';
 
 function App() {
   return (
@@ -15,10 +17,9 @@ function App() {
           
           {/* Cada ruta singular estara dentro de Route */}
           <Route path="/" element={<LoginPage />} />
-
-          {/* <Route element={<LoginPage />}>
-            <Route path="/main-menu" element={<AdminPage />}/>
-          </Route > */}
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/user" element={<UserPage />} />
+          
         </Routes>
       </BrowserRouter>
     </div>
