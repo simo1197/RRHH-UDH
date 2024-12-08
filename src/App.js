@@ -1,3 +1,4 @@
+import React from 'react';
 //Import de para poder usar las funciones de React Router
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 
