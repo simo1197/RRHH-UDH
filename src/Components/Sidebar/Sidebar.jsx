@@ -18,8 +18,50 @@ const Sidebar = () => {
               <span class="direccion">Recursos Humanos</span>
             </div>
             </div>
-            <i class='bx bx-chevron-right'></i>
+            <i class='bx bx-chevron-right toggle'></i>
         </header>
+        <div class="menu-bar">
+          <div class="menu">
+           <ul class="menu-links"> 
+              <li class="nav-links">
+             <a href="#">
+             <i class='bx bxs-user icon'></i>
+             <span class="text nav-text">Personal</span>
+             </a>
+             </li>
+             <li class="nav-links">
+             <a href="#">
+             <i class='bx bxs-user icon'></i>
+             <span class="text nav-text">Vacaciones y Permisos</span>
+             </a>
+             </li>
+             <li class="nav-links">
+             <a href="#">
+             <i class='bx bxs-user icon'></i>
+             <span class="text nav-text">Evaluaciones</span>
+             </a>
+             </li>
+             <li class="nav-links">
+             <a href="#">
+             <i class='bx bxs-user icon'></i>
+             <span class="text nav-text">Servicio</span>
+             </a>
+             </li>
+             <li class="nav-links">
+             <a href="#">
+             <i class='bx bxs-user icon'></i>
+             <span class="text nav-text">Biblioteca</span>
+             </a>
+             </li>
+             <li class="nav-links">
+             <a href="#">
+             <i class='bx bxs-user icon'></i>
+             <span class="text nav-text">Bitacora</span>
+             </a>
+             </li>
+           </ul>
+          </div>
+        </div>
        </nav>
       </div>
     );

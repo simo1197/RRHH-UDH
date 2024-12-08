@@ -40,5 +40,67 @@ header .image-text .header-text{
     flex-direction: column;
 }
 
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 25px;
+    width: 25px;
+    right: -25px;
+    background: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.sidebar header{
+    position: relative;
+}
+
+.sidebar li {
+    height: 50%;
+    background: #fff;
+    margin-top: 40px; 
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.sidebar li .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    font-size: 20px;
+}
+
+.sidebar li .icon,
+.sidebar li .text{
+    color: gray;
+    transition: 0.3s ease;
+}
+
+
+.sidebar li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-decoration: none; /* Quita el subrayado */
+    align-items: center;
+    border-radius: 6px;
+    transition: 0.4s ease;
+}
+
+.sidebar li a:hover{
+    background: rgb(223, 240, 252);
+}
+
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+    color: gray;
+}
 
     
