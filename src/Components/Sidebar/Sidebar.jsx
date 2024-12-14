@@ -1,11 +1,15 @@
 
-import React from "react";
+import React  from "react";
 import './Sidebar.css'; //importamos archivo css para el sidebar//
 import imgLogo from '../../Assets/UDH.jpg'; //importamos la imagen del logo//
 import 'boxicons/css/boxicons.min.css';
 
+
+
+
 // Sidebar.js (o el archivo donde tienes tu componente Sidebar)
 const Sidebar = () => {
+  
     return (
       <div className="mi-componente">
        <nav class="sidebar">
@@ -89,3 +93,4 @@ const Sidebar = () => {
   
 
 export default Sidebar;
+
