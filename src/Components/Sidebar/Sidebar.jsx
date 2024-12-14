@@ -31,36 +31,56 @@ const Sidebar = () => {
              </li>
              <li class="nav-links">
              <a href="#">
-             <i class='bx bxs-user icon'></i>
-             <span class="text nav-text">Vacaciones y Permisos</span>
+             <i class='bx bx-receipt icon'></i>
+             <span class="text nav-text">Licencias</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
-             <i class='bx bxs-user icon'></i>
+             <i class='bx bxs-bar-chart-square icon' ></i>
              <span class="text nav-text">Evaluaciones</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
-             <i class='bx bxs-user icon'></i>
+             <i class='bx bx-check-double icon'></i>
              <span class="text nav-text">Servicio</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
-             <i class='bx bxs-user icon'></i>
+             <i class='bx bx-library icon' ></i>
              <span class="text nav-text">Biblioteca</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
-             <i class='bx bxs-user icon'></i>
+             <i class='bx bx-stats icon'></i>
              <span class="text nav-text">Bitacora</span>
              </a>
              </li>
            </ul>
           </div>
+          <div class="bottom-content">
+        <li class="">
+             <a href="#">
+             <i class='bx bx-log-out icon'></i>
+             <span class="text nav-text">salir</span>
+             </a>
+        </li>
+
+        <li class="mode">
+             <div class="moon-sun">
+             <i class='bx bx-moon icon moon'></i>
+             <i class='bx bx-sun icon sun'></i>
+             </div>
+             <span class="mode-text text">Noche</span>
+
+             <div class="toggle-switch">
+              <span class="switch"></span>
+             </div>
+        </li>
+        </div>
         </div>
        </nav>
       </div>

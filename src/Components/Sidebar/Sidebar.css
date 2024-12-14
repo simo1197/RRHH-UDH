@@ -1,4 +1,4 @@
-
+/*CSS DEL SIDE BAR*/
 .sidebar{
     position: fixed;
     top: 0;
@@ -69,7 +69,7 @@ header .image-text .header-text{
     padding: 12px 0;
 }
 
-.sidebar li .icon {
+.sidebar li .icon { 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,12 +95,90 @@ header .image-text .header-text{
 }
 
 .sidebar li a:hover{
-    background: rgb(223, 240, 252);
+    background: rgb(230, 215, 247);
+    padding: 10px 20px;
 }
 
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text{
     color: gray;
 }
+
+.sidebar .menu-bar {
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .bottom-content .mode {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-bar {
+    background: #fff;
+}
+
+.sidebar .bottom-content .mode {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-bar .mode .moon-sun {
+    height: 50px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Asegura que los iconos se distribuyan bien */
+}
+
+.menu-bar .mode i {
+    position: absolute;
+}
+
+.menu-bar .mode i.sun {
+    opacity: 0;
+}
+
+.menu-bar .mode .toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 60px; /* Asegura que haya suficiente espacio para el interruptor */
+    cursor: pointer;
+}
+
+.toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background-color: #E4E9F7; /* Fondo del switch */
+    transition: background-color 0.3s; /* Añadir transición para suavizar el cambio */
+}
+
+.switch::before {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    content: ' ';
+    height: 15px;
+    width: 15px;
+    background: #fff; /* Cambié el color de fondo a blanco */
+    transition: transform 0.3s; /* Añadí transición para un movimiento suave */
+}
+
+.toggle-switch input:checked + .switch::before {
+    transform: translate(20px, -50%); /* Mueve el círculo a la derecha cuando esté activado */
+}
+
+
+
+
+
+  
 
     
