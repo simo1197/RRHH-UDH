@@ -88,8 +88,8 @@ const Sidebar = () => {
 
         <li className="mode">
               <div className="moon-sun">
-                <i className={`bx bx-moon icon moon ${darkMode ? "active" : ""}`}></i>
-                <i className={`bx bx-sun icon sun ${!darkMode ? "active" : ""}`}></i>
+              <i className={`bx bx-moon icon moon ${darkMode ? "active" : ""}`}></i>
+              <i className={`bx bx-sun icon sun ${!darkMode ? "active" : ""}`}></i>
               </div>
               <span className="mode-text text">Noche</span>
 
