@@ -1,17 +1,30 @@
 
-import React  from "react";
+import React, { useState } from "react";
 import './Sidebar.css'; //importamos archivo css para el sidebar//
 import imgLogo from '../../Assets/UDH.jpg'; //importamos la imagen del logo//
 import 'boxicons/css/boxicons.min.css';
 
 
-
-
 // Sidebar.js (o el archivo donde tienes tu componente Sidebar)
 const Sidebar = () => {
-  
+
+  // Estado para el tema
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Función para alternar el modo
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    // Cambiar la clase del body cuando el modo se alterna
+    if (!darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  };
+
     return (
-      <div className="mi-componente">
+      /*<div className="mi-componente"></div>*/
+      <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
        <nav class="sidebar">
         <header>
             <div class="image-text">
@@ -73,16 +86,16 @@ const Sidebar = () => {
              </a>
         </li>
 
-        <li class="mode">
-             <div class="moon-sun">
-             <i class='bx bx-moon icon moon'></i>
-             <i class='bx bx-sun icon sun'></i>
-             </div>
-             <span class="mode-text text">Noche</span>
+        <li className="mode">
+              <div className="moon-sun">
+                <i className={`bx bx-moon icon moon ${darkMode ? "active" : ""}`}></i>
+                <i className={`bx bx-sun icon sun ${!darkMode ? "active" : ""}`}></i>
+              </div>
+              <span className="mode-text text">Noche</span>
 
-             <div class="toggle-switch">
-              <span class="switch"></span>
-             </div>
+              <div className="toggle-switch" onClick={toggleDarkMode}>
+                <span className="switch"></span>
+              </div>
         </li>
         </div>
         </div>
