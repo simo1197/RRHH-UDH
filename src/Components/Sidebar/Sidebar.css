@@ -1,236 +1,294 @@
 /*CSS DEL SIDE BAR*/
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background-color: #fff;
-    transition: background-color 0.3s ease;
+/* Estilos generales para el sidebar (barra lateral) */
+.sidebar {
+    position: fixed; /* Fija el sidebar en una posición específica en la pantalla */
+    top: 0; /* El sidebar empieza desde la parte superior de la página */
+    left: 0; /* El sidebar empieza desde el borde izquierdo de la página */
+    height: 100%; /* El sidebar ocupará toda la altura de la pantalla */
+    width: 250px; /* El ancho del sidebar es de 250px */
+    padding: 10px 14px; /* Espaciado interno dentro del sidebar, con 10px en la parte superior e inferior, y 14px en los lados */
+    background-color: #fff; /* Fondo blanco para el sidebar */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color de fondo */
 }
 
-.sidebar .image-text img{
- width: 40px;
+/* Estilo para la imagen dentro del sidebar */
+.sidebar .image-text img {
+    width: 40px; /* La imagen tendrá un ancho de 40px */
 }
 
-.mi-componente{
-    height: 100vh;
-    background-color: #E4E9F7;
-    transition: background-color 0.3s ease;
+/* Estilos para el componente principal que envuelve el contenido de la página */
+.mi-componente {
+    height: 100vh; /* El componente ocupa toda la altura de la ventana del navegador */
+    background-color: #dcfafa; /* Color de fondo claro (un tono suave de azul) */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color de fondo */
 }
 
+/* Estilos cuando el componente tiene la clase "dark" (modo oscuro) */
 .mi-componente.dark {
-    background-color: #121212;
+    background-color: #121212; /* Fondo oscuro cuando está en modo oscuro */
 }
 
-
+/* Estilos cuando el cuerpo de la página tiene la clase "dark-mode" (modo oscuro) */
 body.dark-mode .mi-componente {
-    background-color: #121212; /* Fondo oscuro en modo oscuro */
+    background-color: #121212; /* Fondo oscuro para el componente en modo oscuro */
 }
 
 body.dark-mode {
-    background-color: #121212; /* Color de fondo oscuro */
-    color: #ffffff; /* Texto blanco para el modo oscuro */
-  }
-  
-  body.dark-mode .sidebar {
+    background-color: #121212; /* Fondo oscuro para el cuerpo de la página */
+    color: #ffffff; /* Texto blanco cuando está en modo oscuro */
+}
+
+/* Estilos para el sidebar cuando está en modo oscuro */
+body.dark-mode .sidebar {
     background-color: #2C2C2C; /* Fondo oscuro del sidebar */
-  }
-  
-  body.dark-mode .sidebar li {
-    background: #2C2C2C; /* Fondo oscuro de los elementos de la lista */
-  }
-  
-  body.dark-mode .sidebar .text {
-    color: #ffffff; /* Texto blanco en el sidebar */
-  }
-  
-  body.dark-mode .sidebar li a:hover {
-    background: #444444; /* Fondo más oscuro en hover */
-  }
-  
-  body.dark-mode .sidebar li a:hover .icon,
-  body.dark-mode .sidebar li a:hover .text {
-    color: #ffffff; /* Cambia el color de los iconos a blanco cuando se hace hover */
-  }
-  
-  /* Transición de los iconos del switch */
-  .toggle-switch .switch {
-    background-color: #E4E9F7; /* Fondo del switch */
-  }
-  
-  body.dark-mode .toggle-switch .switch {
-    background-color: #444444; /* Fondo del switch en el modo oscuro */
-  }
-  
-  /* Estilos del icono de la luna y el sol */
-  .moon-sun .moon.active {
-    opacity: 1;
-  }
-  
-  .moon-sun .sun.active {
-    opacity: 1;
-  }
+}
 
-.sidebar header .image-text{
+/* Estilo para los elementos de la lista en modo oscuro */
+body.dark-mode .sidebar li {
+    background: #333333; /* Fondo oscuro para los elementos de la lista */
+    width: 100%;
+}
+
+
+body.dark-mode .sidebar .text {
+    color: #ffffff; /* Texto blanco dentro del sidebar en modo oscuro */
+}
+
+/* Efecto de hover sobre los enlaces del sidebar en modo oscuro */
+body.dark-mode .sidebar li a:hover {
+    background: #444444; /* Fondo más oscuro cuando se pasa el ratón sobre el enlace */
+}
+
+/* Cambia el color de los iconos y texto cuando se hace hover en modo oscuro */
+body.dark-mode .sidebar li a:hover .icon,
+body.dark-mode .sidebar li a:hover .text {
+    color: #ffffff; /* Cambia el color de los iconos y el texto a blanco cuando se hace hover */
+}
+
+/* Estilos para el interruptor de modo oscuro (switch) */
+.toggle-switch .switch {
+    background-color: #E4E9F7; /* Color de fondo del interruptor en modo claro */
+}
+
+/* Fondo oscuro del interruptor cuando está en modo oscuro */
+body.dark-mode .toggle-switch .switch {
+    background-color: #444444;
+    transition: background-color 0.3s ease; /* Transición para el cambio de color de fondo */
+}
+
+/* Estilos para los iconos de la luna y el sol */
+.moon-sun .moon.active {
+    opacity: 1; /* Hace visible el icono de la luna cuando está activo */
+}
+
+.moon-sun .sun.active {
+    opacity: 1; /* Hace visible el icono del sol cuando está activo */
+}
+
+/* Estilos para la cabecera del sidebar */
+.sidebar header .image-text {
+    display: flex; /* Usa flexbox para alinear los elementos dentro de .image-text */
+    align-items: center; /* Alinea los elementos de manera vertical al centro */
+}
+
+.sidebar .text {
+    font-size: 16px; /* Tamaño de fuente del texto */
+    font-weight: 750; /* Peso de la fuente (negrita) */
+    color: gray; /* Color del texto en gris */
+}
+
+.sidebar .image {
+    min-width: 60px; /* Ancho mínimo de 60px para la imagen */
+    display: flex; /* Usa flexbox para alinear los elementos dentro de .image */
+    align-items: center; /* Alinea los elementos de manera vertical al centro */
+}
+
+/* Estilo para el texto del encabezado */
+header .image-text .header-text {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Alinea los elementos en una columna */
 }
 
-.sidebar .text{
-    font-size: 16px;
-    font-weight: 750;
-    color: gray;
+/* Estilo para el botón de alternar (toggle) dentro del header del sidebar */
+.sidebar header .toggle {
+    position: absolute; /* Posiciona el botón de manera absoluta dentro del header */
+    top: 30px; /* Coloca el botón fuera del contenedor, pegado a la línea superior */
+    right: -10px; /* Coloca el botón fuera del borde derecho del contenedor */
+    transform: translateY(-50%); /* Asegura que el botón no se mueva verticalmente */
+    height: 25px; /* Altura del botón */
+    width: 25px; /* Ancho del botón */
+    background: yellow; /* Fondo amarillo del botón */
+    display: flex; /* Usa flexbox para alinear los elementos dentro del botón */
+    align-items: center; /* Alinea los elementos de manera vertical */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    font-size: 22px; /* Tamaño de la fuente dentro del botón */
+    cursor: pointer; /* Cambia el cursor a un puntero cuando pasa sobre el botón */
+    transition: transform 0.3s ease; /* Transición suave para los cambios de transform */
 }
 
-.sidebar .image{
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-}
-
-header .image-text .header-text{
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar header .toggle{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 25px;
-    width: 25px;
-    right: -25px;
-    background: yellow;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 22px;
-}
-
-
-
-.sidebar header{
-    position: relative;
-}
-
+/* Estilos para la lista dentro del sidebar */
 .sidebar li {
-    height: 50%;
-    background: #fff;
-    margin-top: 40px; 
-    list-style: none;
-    display: flex;
-    align-items: center;
-    padding: 12px 0;
+    height: 50%; /* La altura de cada elemento de la lista es del 50% */
+    background: #fcfafa; /* Fondo blanco de cada elemento de la lista */
+    margin-top: 40px; /* Márgenes en la parte superior */
+    list-style: none; /* Elimina los puntos de la lista */
+    display: flex; /* Usa flexbox para alinear los elementos dentro de la lista */
+    align-items: center; /* Alinea los elementos de manera vertical al centro */
+    padding: 12px 0; /* Espaciado interno de cada elemento de la lista */
 }
 
+/* Estilo para los iconos dentro de los elementos de la lista */
 .sidebar li .icon { 
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-width: 60px;
-    font-size: 20px;
+    justify-content: center; /* Centra los iconos dentro de cada elemento */
+    min-width: 60px; /* Ancho mínimo de los iconos */
+    font-size: 20px; /* Tamaño de los iconos */
 }
 
+/* Estilo para los iconos y el texto dentro de los elementos de la lista */
 .sidebar li .icon,
-.sidebar li .text{
-    color: gray;
-    transition: 0.3s ease;
+.sidebar li .text {
+    color: gray; /* Color gris para el texto e iconos */
+    transition: 0.3s ease; /* Transición suave para los cambios de color */
 }
 
-
-.sidebar li a{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    text-decoration: none; /* Quita el subrayado */
-    align-items: center;
-    border-radius: 6px;
-    transition: 0.4s ease;
+/* Estilo para los enlaces dentro de los elementos de la lista */
+.sidebar li a {
+    height: 100%; /* Los enlaces ocupan toda la altura del elemento de la lista */
+    width: 100%; /* Los enlaces ocupan todo el ancho */
+    display: flex; /* Usa flexbox para alinear los elementos dentro del enlace */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    align-items: center; /* Centra el contenido de los enlaces */
+    border-radius: 6px; /* Bordes redondeados en los enlaces */
+    transition: 0.4s ease; /* Transición suave para los cambios de fondo */
 }
 
-.sidebar li a:hover{
-    background: rgb(230, 215, 247);
-    padding: 10px 20px;
+/* Efecto de hover sobre los enlaces */
+.sidebar li a:hover {
+    background: rgb(230, 215, 247); /* Fondo morado claro cuando se pasa el ratón sobre el enlace */
+    padding: 10px 20px; /* Aumenta el padding (espaciado) al pasar el ratón */
 }
 
+/* Estilo para los iconos y texto cuando se pasa el ratón sobre los enlaces */
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-    color: gray;
+.sidebar li a:hover .text {
+    color: gray; /* Cambia el color del icono y texto a gris cuando se hace hover */
 }
 
+/* Contenedor de la barra de menú dentro del sidebar */
 .sidebar .menu-bar {
-    height: calc(100% - 50px);
+    height: calc(100% - 50px); /* La altura ocupa todo el espacio restante del sidebar */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Alinea los elementos en columna */
 }
 
+/* Estilos para la parte inferior del sidebar donde se encuentra el modo oscuro */
 .sidebar .bottom-content .mode {
-    margin: 0;
-    padding: 0;
+    margin: 0; /* Elimina los márgenes */
+    padding: 0; /* Elimina el padding */
 }
 
+/* Fondo de la barra de menú */
 .menu-bar {
-    background: #fff;
+    background: #fff; /* Fondo blanco para la barra de menú */
 }
 
-.sidebar .bottom-content .mode {
-    margin: 0;
-    padding: 0;
-}
-
+/* Estilo para el contenedor de los iconos de la luna y el sol */
 .menu-bar .mode .moon-sun {
     height: 50px;
     width: 60px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Asegura que los iconos se distribuyan bien */
+    justify-content: space-between; /* Distribuye los iconos de luna y sol a los extremos */
 }
 
-.menu-bar .mode i {
-    position: absolute;
-}
-
+/* Estilo para el icono del sol que está oculto por defecto */
 .menu-bar .mode i.sun {
-    opacity: 0;
+    opacity: 0; /* El icono del sol está oculto */
 }
 
+/* Estilo para el interruptor del modo oscuro */
 .menu-bar .mode .toggle-switch {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    min-width: 60px; /* Asegura que haya suficiente espacio para el interruptor */
-    cursor: pointer;
+    height: 40px; /* Altura del interruptor */
+    min-width: 60px; /* Ancho mínimo del interruptor */
+    cursor: pointer; /* Cambia el cursor a un puntero */
 }
 
+/* Estilos para el switch (interruptor) */
 .toggle-switch .switch {
     position: relative;
     height: 22px;
     width: 44px;
-    border-radius: 25px;
-    background-color: #E4E9F7; /* Fondo del switch */
-    transition: background-color 0.3s; /* Añadir transición para suavizar el cambio */
+    border-radius: 25px; /* Bordes redondeados en el interruptor */
+    background-color: #E4E9F7; /* Fondo claro del interruptor */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
 }
 
+/* Estilos para el círculo dentro del interruptor */
+/* Transición para el círculo dentro del interruptor */
 .switch::before {
     position: absolute;
-    border-radius: 50%;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    content: ' ';
-    height: 15px;
-    width: 15px;
-    background: #fff; /* Cambié el color de fondo a blanco */
-    transition: transform 0.3s; /* Añadí transición para un movimiento suave */
+    border-radius: 50%; /* Hace que el círculo sea redondo */
+    top: 50%; /* Coloca el círculo al centro vertical */
+    left: 5px; /* Coloca el círculo a la izquierda */
+    transform: translateY(-50%); /* Centra el círculo verticalmente */
+    content: ' '; /* Necesario para que se muestre el círculo */
+    height: 15px; /* Tamaño del círculo */
+    width: 15px; /* Tamaño del círculo */
+    background: #fff; /* Fondo blanco para el círculo */
+    transition: transform 0.3s ease; /* Transición suave para el movimiento del círculo */
 }
 
-.toggle-switch input:checked + .switch::before {
-    transform: translate(20px, -50%); /* Mueve el círculo a la derecha cuando esté activado */
+/* Transición para los iconos de luna y sol */
+.moon-sun .moon,
+.moon-sun .sun {
+    transition: opacity 0.3s ease; /* Transición suave para la opacidad */
 }
+
+/* Elimina la visibilidad de los iconos cuando no están activos */
+.moon-sun .moon:not(.active) {
+    opacity: 0; /* Oculta la luna cuando no está activa */
+}
+
+.moon-sun .sun:not(.active) {
+    opacity: 0; /* Oculta el sol cuando no está activo */
+}
+
+/* Estilo cuando el interruptor está activado (cambia el círculo a la derecha) */
+.toggle-switch input:checked + .switch::before {
+    transform: translate(20px, -50%); /* Mueve el círculo a la derecha cuando el interruptor está activado */
+}
+
+/* Estilos para el sidebar colapsado */
+.sidebar.collapsed {
+    width: 100px;  /* Cambia el ancho cuando está colapsado */
+}
+
+/* Estilo cuando el sidebar está colapsado, oculta el texto */
+.sidebar.collapsed .text {
+    display: none; /* Oculta el texto */
+}
+
+/* Estilos para los enlaces en el sidebar colapsado */
+.sidebar.collapsed .nav-links {
+    justify-content: center; /* Centra los iconos cuando el sidebar está colapsado */
+}
+
+/* Gira el botón de alternar cuando el sidebar está colapsado */
+.sidebar.collapsed header .toggle {
+    transform: rotate(180deg); /* Gira 180 grados el botón */
+}
+
+/* Oculta el texto cuando el sidebar está colapsado */
+.collapsed-text {
+    display: none;
+}
+
 
 
 

@@ -11,6 +11,10 @@ const Sidebar = () => {
   // Estado para el tema
   const [darkMode, setDarkMode] = useState(false);
 
+  // Estado para controlar la expansión del sidebar
+  const [collapsed, setCollapsed] = useState(false);
+
+
   // Función para alternar el modo
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -22,20 +26,28 @@ const Sidebar = () => {
     }
   };
 
+  // Función para alternar la expansión del sidebar
+  const toggleSidebar = () => {
+    setCollapsed(!collapsed);
+  };
+
     return (
       /*<div className="mi-componente"></div>*/
       <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
-       <nav class="sidebar">
+       <nav className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <header>
             <div class="image-text">
             <span class="image">
                <img src={imgLogo} alt="Imagen de Login" class="login-image" />
             </span>
-            <div class="text header-text">
+            <div className={`text header-text ${collapsed ? "collapsed-text" : ""}`}>
               <span class="direccion">Recursos Humanos</span>
             </div>
             </div>
-            <i class='bx bx-chevron-right toggle'></i>
+            <i 
+            className={`bx bx-chevron-${collapsed ? "left" : "right"} toggle`} 
+            onClick={toggleSidebar}
+            ></i>
         </header>
         <div class="menu-bar">
           <div class="menu">
@@ -43,37 +55,37 @@ const Sidebar = () => {
               <li class="nav-links">
              <a href="#">
              <i class='bx bxs-user icon'></i>
-             <span class="text nav-text">Personal</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Personal</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
              <i class='bx bx-receipt icon'></i>
-             <span class="text nav-text">Licencias</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Licencias</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
              <i class='bx bxs-bar-chart-square icon' ></i>
-             <span class="text nav-text">Evaluaciones</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Evaluaciones</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
              <i class='bx bx-check-double icon'></i>
-             <span class="text nav-text">Servicio</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Servicio</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
              <i class='bx bx-library icon' ></i>
-             <span class="text nav-text">Biblioteca</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Biblioteca</span>
              </a>
              </li>
              <li class="nav-links">
              <a href="#">
              <i class='bx bx-stats icon'></i>
-             <span class="text nav-text">Bitacora</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Bitacora</span>
              </a>
              </li>
            </ul>
@@ -82,7 +94,7 @@ const Sidebar = () => {
         <li class="">
              <a href="#">
              <i class='bx bx-log-out icon'></i>
-             <span class="text nav-text">salir</span>
+             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Salir</span>
              </a>
         </li>
 
