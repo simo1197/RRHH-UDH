@@ -192,7 +192,7 @@ header .image-text .header-text {
 
 /* Fondo de la barra de menú */
 .menu-bar {
-    background: #fff; /* Fondo blanco para la barra de menú */
+    background: transparent; /* Fondo blanco para la barra de menú */
 }
 
 /* Estilo para el contenedor de los iconos de la luna y el sol */
@@ -211,6 +211,8 @@ header .image-text .header-text {
 
 /* Estilo para el interruptor del modo oscuro */
 .menu-bar .mode .toggle-switch {
+    position: absolute;     /* TE FALTÓ AÑADIR ESTO PARA EL TOGGLE*/
+    right: 0;        /* TE FALTÓ AÑADIR ESTO PARA EL TOGGLE*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -232,6 +234,7 @@ header .image-text .header-text {
 /* Estilos para el círculo dentro del interruptor */
 /* Transición para el círculo dentro del interruptor */
 .switch::before {
+    content: '';
     position: absolute;
     border-radius: 50%; /* Hace que el círculo sea redondo */
     top: 50%; /* Coloca el círculo al centro vertical */
@@ -242,6 +245,9 @@ header .image-text .header-text {
     width: 15px; /* Tamaño del círculo */
     background: #fff; /* Fondo blanco para el círculo */
     transition: transform 0.3s ease; /* Transición suave para el movimiento del círculo */
+}
+body.dark-mode .switch::before{   
+    left: 24px;                     /* TE FALTÓ AÑADIR ESTO PARA EL TOGGLE*/
 }
 
 /* Transición para los iconos de luna y sol */
@@ -281,7 +287,7 @@ header .image-text .header-text {
 
 /* Gira el botón de alternar cuando el sidebar está colapsado */
 .sidebar.collapsed header .toggle {
-    transform: rotate(180deg); /* Gira 180 grados el botón */
+    transform: rotate(0deg); /* Gira 180 grados el botón */
 }
 
 /* Oculta el texto cuando el sidebar está colapsado */

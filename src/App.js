@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //Importaciones de todas las pages a utilizar
 
-import AdminPage from './pages/AdminPage/AdminPage';
-import UserPage from './pages/UserPage/UserPage';
-import LoginPage from './pages/LoginPage/LoginPage';
+import AdminPage from './Pages/AdminPage/AdminPage.jsx';
+import UserPage from './Pages/UserPage/UserPage.jsx';
+import LoginPage from './Pages/LoginPage/LoginPage.jsx';
 
 function App() {
   return (

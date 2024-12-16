@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import './Sidebar.css'; //importamos archivo css para el sidebar//
-import imgLogo from '../../Assets/UDH.jpg'; //importamos la imagen del logo//
+import imgLogo from '../../Assets/LOGOUDH.png'; //importamos la imagen del logo//
 import 'boxicons/css/boxicons.min.css';
 
 
@@ -100,8 +100,8 @@ const Sidebar = () => {
 
         <li className="mode">
               <div className="moon-sun">
-              <i className={`bx bx-moon icon moon ${darkMode ? "active" : ""}`}></i>
-              <i className={`bx bx-sun icon sun ${!darkMode ? "active" : ""}`}></i>
+              <i className={`bx bx-moon icon moon ${darkMode ? "active bx bx-moon icon moon" : "active bx bx-sun icon sun"}`}></i>
+              {/* <i className={`bx bx-sun icon sun ${!darkMode ? "active" : ""}`}></i> */}
               </div>
               <span className="mode-text text">Noche</span>
 
