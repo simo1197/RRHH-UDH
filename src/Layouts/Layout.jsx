@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../Components/Sidebar/Sidebar";
-import AdminPage from "../Pages/AdminPage/AdminPage";
-import UserPage from "../Pages/UserPage/UserPage";
+import AdminPage from "../pages/AdminPage/AdminPage";
+import UserPage from "../pages/UserPage/UserPage";
 
 const Layout = ({children}) => {
 
