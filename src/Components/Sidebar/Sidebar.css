@@ -212,7 +212,7 @@ header .image-text .header-text {
 /* Estilo para el interruptor del modo oscuro */
 .menu-bar .mode .toggle-switch {
     position: absolute;     /* TE FALTÓ AÑADIR ESTO PARA EL TOGGLE*/
-    right: 0;        /* TE FALTÓ AÑADIR ESTO PARA EL TOGGLE*/
+    right: 20px;        /* TE FALTÓ AÑADIR ESTO PARA EL TOGGLE*/
     display: flex;
     align-items: center;
     justify-content: center;
