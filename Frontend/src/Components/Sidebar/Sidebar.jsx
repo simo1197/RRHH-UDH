@@ -1,121 +1,190 @@
-
-import React, { useState } from "react";
-import './Sidebar.css'; //importamos archivo css para el sidebar//
-import imgLogo from '../../Assets/LOGOUDH.png'; //importamos la imagen del logo//
+import React, { useEffect, useState } from "react";
+import './Sidebar.css';
+import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
 
-
-// Sidebar.js (o el archivo donde tienes tu componente Sidebar)
 const Sidebar = () => {
-
-  // Estado para el tema
+  const [collapsed, setCollapsed] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
 
-  // Estado para controlar la expansión del sidebar
-  const [collapsed, setCollapsed] = useState(false);
-
-
-  // Función para alternar el modo
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    // Cambiar la clase del body cuando el modo se alterna
-    if (!darkMode) {
-      document.body.classList.add("dark-mode");
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
     } else {
-      document.body.classList.remove("dark-mode");
+      document.body.classList.remove('dark-mode');
     }
+  }, [darkMode]);
+
+  const toggleSidebar = () => setCollapsed(prev => !prev);
+
+  const toggleSubMenu = (menu) => {
+    setOpenMenu(prev => (prev === menu ? null : menu));
   };
 
-  // Función para alternar la expansión del sidebar
-  const toggleSidebar = () => {
-    setCollapsed(!collapsed);
-  };
+  const toggleDarkMode = () => setDarkMode(prev => !prev);
 
-    return (
-      /*<div className="mi-componente"></div>*/
-      <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
-       <nav className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+  return (
+    <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
+      <nav className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <header>
-            <div class="image-text">
-            <span class="image">
-               <img src={imgLogo} alt="Imagen de Login" class="login-image" />
+          <div className="image-text">
+            <span className="image">
+              <img src={imgLogo} alt="Logo UDH" />
             </span>
-            <div className={`text header-text ${collapsed ? "collapsed-text" : ""}`}>
-              <span class="direccion">Recursos Humanos</span>
+            <div className={`header-text ${collapsed ? "collapsed-text" : ""}`}>
+              <span className="direccion">Recursos Humanos</span>
             </div>
-            </div>
-            <i 
-            className={`bx bx-chevron-${collapsed ? "left" : "right"} toggle`} 
-            onClick={toggleSidebar}
-            ></i>
-        </header>
-        <div class="menu-bar">
-          <div class="menu">
-           <ul class="menu-links"> 
-              <li class="nav-links">
-             <a href="#">
-             <i class='bx bxs-user icon'></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Personal</span>
-             </a>
-             </li>
-             <li class="nav-links">
-             <a href="#">
-             <i class='bx bx-receipt icon'></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Licencias</span>
-             </a>
-             </li>
-             <li class="nav-links">
-             <a href="#">
-             <i class='bx bxs-bar-chart-square icon' ></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Evaluaciones</span>
-             </a>
-             </li>
-             <li class="nav-links">
-             <a href="#">
-             <i class='bx bx-check-double icon'></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Servicio</span>
-             </a>
-             </li>
-             <li class="nav-links">
-             <a href="#">
-             <i class='bx bx-library icon' ></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Biblioteca</span>
-             </a>
-             </li>
-             <li class="nav-links">
-             <a href="#">
-             <i class='bx bx-stats icon'></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Bitacora</span>
-             </a>
-             </li>
-           </ul>
           </div>
-          <div class="bottom-content">
-        <li class="">
-             <a href="#">
-             <i class='bx bx-log-out icon'></i>
-             <span className={`text nav-text ${collapsed ? "collapsed-text" : ""}`}>Salir</span>
-             </a>
-        </li>
 
-        <li className="mode">
+          {/* botón para colapsar/expandir */}
+          <div
+            className="toggle"
+            role="button"
+            tabIndex={0}
+            onClick={toggleSidebar}
+            onKeyDown={(e) => { if (e.key === 'Enter') toggleSidebar(); }}
+            aria-label="Colapsar menú"
+          >
+            <i className={`bx ${collapsed ? 'bx-chevrons-right' : 'bx-chevrons-left'}`} />
+          </div>
+        </header>
+
+        <div className="menu-bar">
+          <div className="menu">
+            <ul className="menu-links">
+
+              {/* PERSONAL */}
+              <li className={`menu-item ${openMenu === 'personal' ? 'open' : ''}`}>
+                <div
+                  className="nav-links"
+                  onClick={() => { if (!collapsed) toggleSubMenu('personal'); }}
+                  style={{ cursor: collapsed ? 'default' : 'pointer' }}
+                >
+                  <i className='bx bxs-user icon' />
+                  <span className="text nav-text">Personal</span>
+                  {!collapsed && <i className="bx bx-chevron-down arrow" />}
+                </div>
+                <ul className={`submenu ${openMenu === 'personal' ? 'open' : ''}`}>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Lista de personal</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Registrar personal</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Editar / Actualizar datos</a></li>
+                </ul>
+              </li>
+
+              {/* LICENCIAS */}
+              <li className={`menu-item ${openMenu === 'licencias' ? 'open' : ''}`}>
+                <div
+                  className="nav-links"
+                  onClick={() => { if (!collapsed) toggleSubMenu('licencias'); }}
+                  style={{ cursor: collapsed ? 'default' : 'pointer' }}
+                >
+                  <i className='bx bx-receipt icon' />
+                  <span className="text nav-text">Licencias</span>
+                  {!collapsed && <i className="bx bx-chevron-down arrow" />}
+                </div>
+                <ul className={`submenu ${openMenu === 'licencias' ? 'open' : ''}`}>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Solicitar licencia</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Historial de licencias</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Aprobaciones pendientes</a></li>
+                </ul>
+              </li>
+
+              {/* EVALUACIONES */}
+              <li className={`menu-item ${openMenu === 'evaluaciones' ? 'open' : ''}`}>
+                <div
+                  className="nav-links"
+                  onClick={() => { if (!collapsed) toggleSubMenu('evaluaciones'); }}
+                  style={{ cursor: collapsed ? 'default' : 'pointer' }}
+                >
+                  <i className='bx bxs-bar-chart-square icon' />
+                  <span className="text nav-text">Evaluaciones</span>
+                  {!collapsed && <i className="bx bx-chevron-down arrow" />}
+                </div>
+                <ul className={`submenu ${openMenu === 'evaluaciones' ? 'open' : ''}`}>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Evaluar personal</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Resultados de evaluaciones</a></li>
+                </ul>
+              </li>
+
+              {/* SERVICIO */}
+              <li className={`menu-item ${openMenu === 'servicio' ? 'open' : ''}`}>
+                <div
+                  className="nav-links"
+                  onClick={() => { if (!collapsed) toggleSubMenu('servicio'); }}
+                  style={{ cursor: collapsed ? 'default' : 'pointer' }}
+                >
+                  <i className='bx bx-check-double icon' />
+                  <span className="text nav-text">Servicio</span>
+                  {!collapsed && <i className="bx bx-chevron-down arrow" />}
+                </div>
+                <ul className={`submenu ${openMenu === 'servicio' ? 'open' : ''}`}>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Matriz de situación</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Asignar situación</a></li>
+                </ul>
+              </li>
+
+              {/* BIBLIOTECA */}
+              <li className={`menu-item ${openMenu === 'biblioteca' ? 'open' : ''}`}>
+                <div
+                  className="nav-links"
+                  onClick={() => { if (!collapsed) toggleSubMenu('biblioteca'); }}
+                  style={{ cursor: collapsed ? 'default' : 'pointer' }}
+                >
+                  <i className='bx bx-library icon' />
+                  <span className="text nav-text">Biblioteca</span>
+                  {!collapsed && <i className="bx bx-chevron-down arrow" />}
+                </div>
+                <ul className={`submenu ${openMenu === 'biblioteca' ? 'open' : ''}`}>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Documentos</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Subir documento</a></li>
+                </ul>
+              </li>
+
+              {/* BITÁCORA */}
+              <li className={`menu-item ${openMenu === 'bitacora' ? 'open' : ''}`}>
+                <div
+                  className="nav-links"
+                  onClick={() => { if (!collapsed) toggleSubMenu('bitacora'); }}
+                  style={{ cursor: collapsed ? 'default' : 'pointer' }}
+                >
+                  <i className='bx bx-stats icon' />
+                  <span className="text nav-text">Bitácora</span>
+                  {!collapsed && <i className="bx bx-chevron-down arrow" />}
+                </div>
+                <ul className={`submenu ${openMenu === 'bitacora' ? 'open' : ''}`}>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Ver bitácora completa</a></li>
+                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Filtrar por usuario</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </div>
+
+          {/* BOTTOM CONTENT (fijo abajo) */}
+          <div className="bottom-content">
+            <li className="logout">
+              <a href="#" onClick={(e)=>{ e.preventDefault(); /* logout logic */ }}>
+                <i className='bx bx-log-out icon' />
+                <span className="text nav-text">Salir</span>
+              </a>
+            </li>
+
+            <li className="mode" onClick={toggleDarkMode} role="button" tabIndex={0}>
               <div className="moon-sun">
-              <i className={`bx bx-moon icon moon ${darkMode ? "active bx bx-moon icon moon" : "active bx bx-sun icon sun"}`}></i>
-              {/* <i className={`bx bx-sun icon sun ${!darkMode ? "active" : ""}`}></i> */}
+                <i className={`bx ${darkMode ? 'bx-moon' : 'bx-sun'} icon`} />
+                <span className="mode-text text">Noche</span>
               </div>
-              <span className="mode-text text">Noche</span>
 
-              <div className="toggle-switch" onClick={toggleDarkMode}>
-                <span className="switch"></span>
+              <div className="toggle-switch" aria-pressed={darkMode}>
+                <span className="switch" />
               </div>
-        </li>
+            </li>
+          </div>
         </div>
-        </div>
-       </nav>
-      </div>
-    );
-  };
-  
+      </nav>
+    </div>
+  );
+};
 
 export default Sidebar;
-
