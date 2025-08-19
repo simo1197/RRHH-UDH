@@ -1,0 +1,172 @@
+/* --- Base --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background: #c9a227; /* dorado día */
+  color: #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar.dark {
+  background: #111; /* negro noche */
+  color: #fff;
+}
+
+/* --- Logo --- */
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* --- Links --- */
+.navbar-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.navbar.dark .navbar-links a:hover {
+  color: #c9a227; /* hover dorado en modo noche */
+}
+
+/* --- Right section --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* --- Botones de iconos --- */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+/* --- User menu --- */
+.user-menu {
+  position: relative;
+}
+
+.user-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.user-img {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: #fff;
+  color: #000;
+  min-width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.navbar.dark .dropdown {
+  background: #222;
+  color: #fff;
+}
+
+.dropdown .user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.8rem;
+}
+
+.user-img-large {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.user-email {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown a:hover {
+  background: #f5f5f5;
+}
+
+.navbar.dark .dropdown a:hover {
+  background: #333;
+  color: #c9a227;
+}
+
+/* --- Responsive --- */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  .navbar-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    flex-direction: column;
+    background: inherit;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .navbar-links.open {
+    max-height: 300px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-5px);}
+  to {opacity: 1; transform: translateY(0);}
+}
