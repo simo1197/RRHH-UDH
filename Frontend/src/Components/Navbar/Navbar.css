@@ -6,9 +6,13 @@
   padding: 0.8rem 1.5rem;
   background: #c9a227; /* dorado día */
   color: #000;
+
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  /* Se ajustarán dinámicamente con React */
+  transition: margin-left 0s ease, width 0s ease;
 }
 
 .navbar.dark {
@@ -170,3 +174,29 @@
   from {opacity: 0; transform: translateY(-5px);}
   to {opacity: 1; transform: translateY(0);}
 }
+
+/* Forzar modo noche solo en el navbar usando la clase del body */
+body.dark-mode .navbar {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .navbar .navbar-links a {
+  color: #fff !important;
+}
+
+body.dark-mode .navbar .navbar-links a:hover {
+  color: #c9a227 !important; /* dorado al pasar el mouse */
+}
+
+body.dark-mode .navbar .dropdown {
+  background: #222 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .navbar .dropdown a:hover {
+  background: #333 !important;
+  color: #c9a227 !important;
+}
+
+

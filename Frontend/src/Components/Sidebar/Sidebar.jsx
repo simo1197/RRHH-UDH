@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import './Sidebar.css';
 import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
+import { Home, Users, BookOpen, Settings } from "lucide-react";
+
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);

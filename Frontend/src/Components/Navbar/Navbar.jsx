@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Sun, Moon, Menu, X, User, LogOut, Settings } from "lucide-react";
 import "./Navbar.css";
 
@@ -6,14 +6,52 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(250); // ancho inicial
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark-mode", !darkMode);
   };
 
+  // Función para detectar ancho del sidebar
+  const updateSidebarWidth = () => {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) {
+      const width = parseInt(window.getComputedStyle(sidebar).width);
+      setSidebarWidth(width);
+    }
+  };
+
+  useEffect(() => {
+    // Detectar al cargar
+    updateSidebarWidth();
+
+    const sidebar = document.querySelector(".sidebar");
+    if (!sidebar) return;
+
+    // Actualizar al terminar transición de ancho
+    const onTransitionEnd = (e) => {
+      if (e.propertyName === "width") updateSidebarWidth();
+    };
+
+    sidebar.addEventListener("transitionend", onTransitionEnd);
+
+    // Escuchar redimensionamiento de ventana
+    window.addEventListener("resize", updateSidebarWidth);
+
+    return () => {
+      sidebar.removeEventListener("transitionend", onTransitionEnd);
+      window.removeEventListener("resize", updateSidebarWidth);
+    };
+  }, []);
+
+  const navbarStyle = {
+    marginLeft: `${sidebarWidth}px`,
+    width: `calc(100% - ${sidebarWidth}px)`,
+  };
+
   return (
-    <nav className={`navbar ${darkMode ? "dark" : ""}`}>
+    <nav className={`navbar ${darkMode ? "dark" : ""}`} style={navbarStyle}>
       <div className="navbar-left">
         <span className="logo">UDH2024</span>
       </div>
