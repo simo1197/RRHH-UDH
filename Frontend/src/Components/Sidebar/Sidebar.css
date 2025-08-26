@@ -410,6 +410,95 @@ body.dark-mode .menu-item:hover {
   border: 2px solid #FFD700; /* borde dorado brillante */
   box-shadow: 0 0 16px rgba(255, 215, 0, 1); /* brillo más intenso */
 }
+/* Ocultar texto y centrar el ícono cuando el sidebar está colapsado */
+.sidebar.collapsed .mode .mode-text {
+  display: none;
+}
+
+.sidebar.collapsed .mode .moon-sun {
+  justify-content: center;
+  width: 100%;
+}
+/* ======= FORZAR CIERRE DE SUBMENÚS CUANDO EL SIDEBAR ESTÁ COLAPSADO =======
+   Pegar al final de Sidebar.css
+   - Cubre varios nombres donde podría estar la clase "collapsed" (.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar)
+   - Anula display / altura / visibilidad / pointer-events con !important
+   - Restaura comportamiento normal cuando NO está colapsado
+*/
+
+/* 1) Nombre posibles del contenedor que recibe .collapsed */
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed {
+
+  /* 2) Ocultar listas internas comunes */
+  /* > ul y cualquier contenedor típico (.submenu-list, .submenu-body) */
+  --hide-selectors: ".submenu > ul, .submenu .submenu-list, .submenu .submenu-body, .submenu .children";
+}
+
+/* 3) Reglas efectivas (prácticas): */
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  .submenu > ul,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  .submenu .submenu-list,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  .submenu .submenu-body,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  .submenu .children,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  .submenu[aria-expanded="true"] > ul,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  [data-open="true"] > .submenu,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  [data-open="true"] > .submenu > ul
+{
+  display: none !important;
+  max-height: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-6px) !important;
+  transition: none !important;
+}
+
+/* 4) Si tu submenu se "teleporta" (appendTo body) y tiene clase .submenu-popup o .submenu-flyout */
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed ~ .submenu-popup,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed .submenu-popup,
+body:is(.sidebar-collapsed, .nav-collapsed, .collapsed) .submenu-popup,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar).collapsed
+  .submenu-flyout,
+body:is(.sidebar-collapsed, .nav-collapsed, .collapsed) .submenu-flyout {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 5) Restaurar comportamiento normal cuando NO está colapsado (evita efectos colaterales) */
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar):not(.collapsed)
+  .submenu > ul,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar):not(.collapsed)
+  .submenu .submenu-list,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar):not(.collapsed)
+  .submenu.open > ul,
+:is(.sidebar, .nav, .wrapper, #sidebar, .sidenav, .app-sidebar, .layout-sidebar):not(.collapsed)
+  .submenu[aria-expanded="true"] > ul {
+  display: block !important;
+  max-height: 9999px !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  transition: max-height .28s ease, opacity .18s ease;
+}
+
+/* ---------- Debug helpers (opcional) ----------
+   Quitar o comentar si no quieres outlines/diagnóstico visual.
+   Activa para ver dónde está la clase .collapsed y qué .submenu existen.
+*/
+.sidebar.debug-outline, .nav.debug-outline, #sidebar.debug-outline {
+  outline: 2px dashed rgba(255,0,0,0.25);
+}
+.submenu.debug-outline { outline: 1px dashed rgba(0,120,255,0.20); }
 
 
 

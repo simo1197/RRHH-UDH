@@ -4,7 +4,6 @@ import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
 import { Home, Users, BookOpen, Settings } from "lucide-react";
 
-
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
@@ -18,7 +17,13 @@ const Sidebar = () => {
     }
   }, [darkMode]);
 
-  const toggleSidebar = () => setCollapsed(prev => !prev);
+  // 🔹 Aquí se cambia la función para cerrar submenus al colapsar
+  const toggleSidebar = () => {
+    if (!collapsed) {
+      setOpenMenu(null); // cierra todos los submenus
+    }
+    setCollapsed(prev => !prev);
+  };
 
   const toggleSubMenu = (menu) => {
     setOpenMenu(prev => (prev === menu ? null : menu));
@@ -55,7 +60,6 @@ const Sidebar = () => {
         <div className="menu-bar">
           <div className="menu">
             <ul className="menu-links">
-
               {/* PERSONAL */}
               <li className={`menu-item ${openMenu === 'personal' ? 'open' : ''}`}>
                 <div
@@ -175,7 +179,8 @@ const Sidebar = () => {
             <li className="mode" onClick={toggleDarkMode} role="button" tabIndex={0}>
               <div className="moon-sun">
                 <i className={`bx ${darkMode ? 'bx-moon' : 'bx-sun'} icon`} />
-                <span className="mode-text text">Noche</span>
+                {/* separo el texto para poder ocultarlo cuando collapsed */}
+                {!collapsed && <span className="mode-text text">Noche</span>}
               </div>
 
               <div className="toggle-switch" aria-pressed={darkMode}>
