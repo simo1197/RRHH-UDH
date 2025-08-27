@@ -1,6 +1,6 @@
 // src/pages/BitacoraPage.jsx
 import React from "react";
-import MainLayout from "../layouts/MainLayout";
+import Layout from "../../Layouts/Layout";
 import "./BitacoraPage.css";
 
 const BitacoraPage = () => {
@@ -12,7 +12,7 @@ const BitacoraPage = () => {
   ];
 
   return (
-    <MainLayout>
+    <Layout userType="user">
       <div className="bitacora-page">
         <h1>Bitácora de Eventos</h1>
         <table className="bitacora-table">
@@ -36,7 +36,7 @@ const BitacoraPage = () => {
           </tbody>
         </table>
       </div>
-    </MainLayout>
+    </Layout>
   );
 };
 

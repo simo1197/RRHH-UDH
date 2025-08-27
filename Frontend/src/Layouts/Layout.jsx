@@ -19,7 +19,7 @@ const Layout = ({children}) => {
             <Sidebar />
             <Navbar />
             {/* {moduleRender[props.role]}*/ }
-            {/*children*/} 
+            {children} 
         </div>
     )
 }

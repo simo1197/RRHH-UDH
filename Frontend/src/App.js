@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AdminPage from './pages/AdminPage/AdminPage.jsx';
 import UserPage from './pages/UserPage/UserPage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import BitacoraPage from './pages/BitacoraPage/BitacoraPage.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/user" element={<UserPage />} />
+          <Route path="/bitacora" element={<BitacoraPage />} />
           
         </Routes>
       </BrowserRouter>
