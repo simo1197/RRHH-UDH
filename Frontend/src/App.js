@@ -8,6 +8,10 @@ import AdminPage from './pages/AdminPage/AdminPage.jsx';
 import UserPage from './pages/UserPage/UserPage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import BitacoraPage from './pages/BitacoraPage/BitacoraPage.jsx';
+import BibliotecaPage from './pages/BibliotecaPage/BibliotecaPage.jsx';
+import RegPersonalPage from './pages/PersonalPage/RegPersonalPage.jsx';
+import ViewPersonalPage from './pages/ViewPersonalPage/ViewPersonalPage.jsx';
+import SituacionView from './pages/SituacionView/SituacionView.jsx';
 
 function App() {
   return (
@@ -22,7 +26,11 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/bitacora" element={<BitacoraPage />} />
-          
+          <Route path="/biblioteca" element={<BibliotecaPage />} />
+          <Route path="/regpersonal" element={<RegPersonalPage />} />
+          <Route path="/viewpersonal" element={<ViewPersonalPage />} />
+          <Route path="/situacionview" element={<SituacionView />} />
+         
         </Routes>
       </BrowserRouter>
     </div>

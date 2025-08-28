@@ -1,0 +1,94 @@
+.viewpersonal-page {
+  padding: 20px;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.viewpersonal-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.viewpersonal-subtitle {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.table-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+.personal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.personal-table thead {
+  background: #3498db;
+  color: #fff;
+}
+
+.personal-table th,
+.personal-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.personal-table tbody tr:hover {
+  background: #f1f9ff;
+}
+
+.personal-table th:first-child,
+.personal-table td:first-child {
+  text-align: center;
+}
+
+.personal-table th:last-child,
+.personal-table td:last-child {
+  text-align: center;
+}
+
+.btn-ver,
+.btn-editar,
+.btn-eliminar {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin: 0 3px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-ver {
+  background: #2980b9;
+  color: #fff;
+}
+.btn-ver:hover {
+  background: #1f6694;
+}
+
+.btn-editar {
+  background: #f39c12;
+  color: #fff;
+}
+.btn-editar:hover {
+  background: #d68910;
+}
+
+.btn-eliminar {
+  background: #e74c3c;
+  color: #fff;
+}
+.btn-eliminar:hover {
+  background: #c0392b;
+}
