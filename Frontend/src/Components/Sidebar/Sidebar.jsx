@@ -3,8 +3,7 @@ import './Sidebar.css';
 import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
   const [openMenu, setOpenMenu] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -18,7 +17,7 @@ const Sidebar = () => {
 
   const toggleSidebar = () => {
     if (!collapsed) setOpenMenu(null);
-    setCollapsed(prev => !prev);
+    setCollapsed(prev => !prev); // Cambia el estado compartido
   };
 
   const toggleSubMenu = (menu) => {
@@ -195,4 +194,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-

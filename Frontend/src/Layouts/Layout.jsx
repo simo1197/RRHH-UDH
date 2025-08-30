@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import Navbar from "../Components/Navbar/Navbar";
-import AdminPage from "../pages/AdminPage/AdminPage";
-import UserPage from "../pages/UserPage/UserPage";
 
+const Layout = ({ children }) => {
+    const [collapsed, setCollapsed] = useState(false); // Estado compartido con Sidebar
 
-const Layout = ({children}) => {
+    return (
+        <div style={{ display: "flex", minHeight: "100vh" }}>
+            {/* Sidebar recibe el estado collapsed y el setCollapsed */}
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
-    const moduleRender = {
-        'abcs': Sidebar,
-        'admin': ()=>{return <AdminPage />},
-        'user': ()=>{return <UserPage />},
-        'pxdd': 'pageModule_Servicio'
-    }
-
-    return(
-        <div>
-            <Sidebar />
-            <Navbar />
-            {/* {moduleRender[props.role]}*/ }
-            {children} 
+            {/* Contenedor principal que ajusta el margen según el estado del sidebar */}
+            <div
+                style={{
+                    flex: 1,
+                    transition: "margin-left 0.3s ease",
+                    marginLeft: collapsed ? "70px" : "250px", // coincidir con tus variables CSS
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
+                <Navbar />
+                {children}
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default Layout;
