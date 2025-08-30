@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import './Sidebar.css';
 import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
-import { Home, Users, BookOpen, Settings } from "lucide-react";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -17,11 +16,8 @@ const Sidebar = () => {
     }
   }, [darkMode]);
 
-  // 🔹 Aquí se cambia la función para cerrar submenus al colapsar
   const toggleSidebar = () => {
-    if (!collapsed) {
-      setOpenMenu(null); // cierra todos los submenus
-    }
+    if (!collapsed) setOpenMenu(null);
     setCollapsed(prev => !prev);
   };
 
@@ -34,6 +30,7 @@ const Sidebar = () => {
   return (
     <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
       <nav className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+        {/* ====== HEADER ====== */}
         <header>
           <div className="image-text">
             <span className="image">
@@ -44,7 +41,6 @@ const Sidebar = () => {
             </div>
           </div>
 
-          {/* botón para colapsar/expandir */}
           <div
             className="toggle"
             role="button"
@@ -57,6 +53,7 @@ const Sidebar = () => {
           </div>
         </header>
 
+        {/* ====== MENÚ PRINCIPAL ====== */}
         <div className="menu-bar">
           <div className="menu">
             <ul className="menu-links">
@@ -167,10 +164,10 @@ const Sidebar = () => {
             </ul>
           </div>
 
-          {/* BOTTOM CONTENT (fijo abajo) */}
+          {/* ====== BOTTOM CONTENT ====== */}
           <div className="bottom-content">
             <li className="logout">
-              <a href="#" onClick={(e)=>{ e.preventDefault(); /* logout logic */ }}>
+              <a href="#" onClick={(e)=>{ e.preventDefault(); }}>
                 <i className='bx bx-log-out icon' />
                 <span className="text nav-text">Salir</span>
               </a>
@@ -179,15 +176,18 @@ const Sidebar = () => {
             <li className="mode" onClick={toggleDarkMode} role="button" tabIndex={0}>
               <div className="moon-sun">
                 <i className={`bx ${darkMode ? 'bx-moon' : 'bx-sun'} icon`} />
-                {/* separo el texto para poder ocultarlo cuando collapsed */}
-                {!collapsed && <span className="mode-text text">Noche</span>}
+                {!collapsed && (
+                  <span className="mode-text text">
+                    {darkMode ? 'Noche' : 'Día'}
+                  </span>
+                )}
               </div>
-
               <div className="toggle-switch" aria-pressed={darkMode}>
                 <span className="switch" />
               </div>
             </li>
           </div>
+
         </div>
       </nav>
     </div>
@@ -195,3 +195,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
