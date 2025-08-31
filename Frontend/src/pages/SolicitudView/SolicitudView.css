@@ -1,0 +1,116 @@
+.solicitud-completa-container {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .solicitud-completa-container {
+  background: #2c2c3e;
+  color: #f5f5f5;
+}
+
+.solicitud-completa-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1e1e2f;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .solicitud-completa-container h2 {
+  color: #f5f5f5;
+}
+
+.solicitud-completa-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.solicitud-completa-form input,
+.solicitud-completa-form select,
+.solicitud-completa-form textarea {
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .solicitud-completa-form input,
+body.dark-mode .solicitud-completa-form select,
+body.dark-mode .solicitud-completa-form textarea {
+  background: #3b3b4f;
+  border: 1px solid #555;
+  color: #f5f5f5;
+}
+
+.solicitud-completa-form input:focus,
+.solicitud-completa-form select:focus,
+.solicitud-completa-form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59,130,246,0.5);
+}
+
+/* Rango de horas */
+.hora-rango {
+  display: flex;
+  gap: 1rem;
+}
+
+.hora-rango label {
+  flex: 1;
+}
+
+/* Botón de envío */
+.boton-enviar {
+  width: 100%;
+  padding: 0.9rem;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.boton-enviar:hover {
+  background: #2563eb;
+}
+
+/* Resumen de la solicitud */
+.resumen-solicitud {
+  background: #f3f4f6;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .resumen-solicitud {
+  background: #3b3b4f;
+  color: #f5f5f5;
+}
+
+/* Encabezado del resumen */
+.resumen-solicitud h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .hora-rango {
+    flex-direction: column;
+  }
+}
+

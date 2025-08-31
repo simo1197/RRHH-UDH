@@ -1,0 +1,140 @@
+.historial-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .historial-container {
+  background: #2c2c3e;
+  color: #f5f5f5;
+}
+
+.historial-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1e1e2f;
+}
+
+body.dark-mode .historial-container h2 {
+  color: #f5f5f5;
+}
+
+.filtros {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filtros label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.filtros select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .filtros select {
+  background: #3b3b4f;
+  border: 1px solid #555;
+  color: #f5f5f5;
+}
+
+/* Tabla */
+.tabla-historial {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-historial th,
+.tabla-historial td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .tabla-historial th,
+body.dark-mode .tabla-historial td {
+  border-bottom: 1px solid #555;
+}
+
+.tabla-historial th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+body.dark-mode .tabla-historial th {
+  background: #3b3b4f;
+}
+
+.tabla-historial tr:hover {
+  background: #f3f4f6;
+}
+
+body.dark-mode .tabla-historial tr:hover {
+  background: #3c3c58;
+}
+
+/* Estados */
+.estado {
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  text-align: center;
+  width: fit-content;
+}
+
+.estado.aprobado {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.estado.pendiente {
+  background: #fef3c7;
+  color: #78350f;
+}
+
+.estado.rechazado {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+body.dark-mode .estado.aprobado {
+  background: #065f46;
+  color: #d1fae5;
+}
+
+body.dark-mode .estado.pendiente {
+  background: #78350f;
+  color: #fef3c7;
+}
+
+body.dark-mode .estado.rechazado {
+  background: #991b1b;
+  color: #fee2e2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabla-historial th,
+  .tabla-historial td {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .filtros {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+}

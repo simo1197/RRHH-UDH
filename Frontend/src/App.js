@@ -12,6 +12,8 @@ import BibliotecaPage from './pages/BibliotecaPage/BibliotecaPage.jsx';
 import RegPersonalPage from './pages/PersonalPage/RegPersonalPage.jsx';
 import ViewPersonalPage from './pages/ViewPersonalPage/ViewPersonalPage.jsx';
 import SituacionView from './pages/SituacionView/SituacionView.jsx';
+import SolicitudView from './pages/SolicitudView/SolicitudView.jsx';
+import HistoriaLicencias from './pages/HistoriaLicencias/HistoriaLicencias.jsx';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/regpersonal" element={<RegPersonalPage />} />
           <Route path="/viewpersonal" element={<ViewPersonalPage />} />
           <Route path="/situacionview" element={<SituacionView />} />
+          <Route path="/solicitudview" element={<SolicitudView />} />
+          <Route path="/historialicencias" element={<HistoriaLicencias />} />
          
         </Routes>
       </BrowserRouter>
