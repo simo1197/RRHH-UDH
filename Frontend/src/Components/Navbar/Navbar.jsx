@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import { Sun, Moon, Menu, X, User, LogOut, Settings } from "lucide-react";
+import { Menu, X, User, LogOut, Settings } from "lucide-react";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark-mode", !darkMode);
-  };
-
   return (
-    <nav className={`navbar ${darkMode ? "dark" : ""}`}>
+    <nav className="navbar">
       <div className="navbar-left">
         <span className="logo">UDH2024</span>
       </div>
@@ -26,11 +20,6 @@ export default function Navbar() {
       </div>
 
       <div className="navbar-right">
-        {/* Botón DarkMode */}
-        <button onClick={toggleDarkMode} className="icon-btn">
-          {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-
         {/* Menú de usuario */}
         <div className="user-menu">
           <button

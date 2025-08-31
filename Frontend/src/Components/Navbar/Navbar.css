@@ -1,51 +1,69 @@
+/* Navbar general */
 .navbar {
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
-  border-bottom: 1px solid #ddd;
-  background: #fff;
-  transition: background 0.3s ease;
+  padding: 0 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-bottom: 1px solid #e5e7eb;
   position: relative;
-  z-index: 100; /* queda debajo del toggle del sidebar */
+  z-index: 100;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-.navbar.dark {
-  background: #1f2937;
-  color: #fff;
-  border-bottom: 1px solid #444;
-}
-
+/* Logo */
 .navbar-left .logo {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 1px;
 }
 
+/* Links principales */
 .navbar-links {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .navbar-links a {
   text-decoration: none;
-  color: inherit;
-  font-size: 0.95rem;
+  color: #374151;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #3b82f6; /* azul moderno */
+  transition: width 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #1d4ed8;
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+/* Navbar derecha */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-}
-
+/* Usuario */
 .user-menu {
   position: relative;
 }
@@ -54,59 +72,89 @@
   background: none;
   border: none;
   cursor: pointer;
+  padding: 2px;
+  transition: transform 0.2s ease;
+}
+
+.user-btn:hover {
+  transform: scale(1.05);
 }
 
 .user-img {
   border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
 }
 
+/* Dropdown */
 .dropdown {
   position: absolute;
-  top: 45px;
+  top: 55px;
   right: 0;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  width: 220px;
-  padding: 0.5rem;
-  z-index: 150; /* sobre el contenido pero debajo del toggle */
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  width: 240px;
+  padding: 0.75rem;
+  z-index: 150;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
 }
 
-.dropdown a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  text-decoration: none;
-  color: #333;
-  font-size: 0.9rem;
+.user-menu:hover .dropdown,
+.user-menu:focus-within .dropdown {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-.dropdown a:hover {
-  background: #f3f4f6;
-}
-
+/* Contenido del dropdown */
 .user-info {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .user-img-large {
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
 }
 
 .username {
-  font-weight: bold;
+  font-weight: 600;
+  color: #111827;
 }
 
 .user-email {
-  font-size: 0.8rem;
-  color: gray;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Links dropdown */
+.dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem;
+  text-decoration: none;
+  color: #374151;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown a:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
 }
 
 /* Responsive */
@@ -115,24 +163,31 @@
   background: none;
   border: none;
   cursor: pointer;
+  color: #374151;
+  transition: transform 0.2s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
-  }
-
-  .navbar-links.open {
-    display: flex;
     flex-direction: column;
     position: absolute;
     top: 60px;
     left: 0;
     right: 0;
-    background: white;
-    border-top: 1px solid #ddd;
-    padding: 1rem;
-    z-index: 150; /* dropdown responsive encima del contenido */
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    z-index: 150;
+  }
+
+  .navbar-links.open {
+    display: flex;
   }
 
   .menu-toggle {
