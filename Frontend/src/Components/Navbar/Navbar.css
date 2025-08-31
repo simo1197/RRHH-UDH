@@ -12,6 +12,14 @@
   z-index: 100;
   transition: all 0.3s ease;
   font-family: 'Inter', sans-serif;
+  color: #1e1e2f;
+}
+
+/* Modo oscuro */
+body.dark-mode .navbar {
+  background: #2c2c3e;
+  border-bottom: 1px solid #444;
+  color: #f5f5f5;
 }
 
 /* Logo */
@@ -20,6 +28,11 @@
   font-weight: 700;
   color: #111827;
   letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .navbar-left .logo {
+  color: #f5f5f5;
 }
 
 /* Links principales */
@@ -37,6 +50,10 @@
   transition: color 0.3s ease;
 }
 
+body.dark-mode .navbar-links a {
+  color: #f5f5f5;
+}
+
 .navbar-links a::after {
   content: "";
   position: absolute;
@@ -50,6 +67,10 @@
 
 .navbar-links a:hover {
   color: #1d4ed8;
+}
+
+body.dark-mode .navbar-links a:hover {
+  color: #93c5fd;
 }
 
 .navbar-links a:hover::after {
@@ -102,7 +123,13 @@
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .dropdown {
+  background: #2c2c3e;
+  color: #f5f5f5;
+  border: 1px solid #444;
 }
 
 .user-menu:hover .dropdown,
@@ -121,6 +148,10 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
+body.dark-mode .user-info {
+  border-bottom: 1px solid #444;
+}
+
 .user-img-large {
   border-radius: 50%;
   width: 48px;
@@ -134,9 +165,17 @@
   color: #111827;
 }
 
+body.dark-mode .username {
+  color: #f5f5f5;
+}
+
 .user-email {
   font-size: 0.85rem;
   color: #6b7280;
+}
+
+body.dark-mode .user-email {
+  color: #ccc;
 }
 
 /* Links dropdown */
@@ -152,9 +191,18 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 
+body.dark-mode .dropdown a {
+  color: #f5f5f5;
+}
+
 .dropdown a:hover {
   background: #eff6ff;
   color: #1d4ed8;
+}
+
+body.dark-mode .dropdown a:hover {
+  background: #3b3b4f;
+  color: #93c5fd;
 }
 
 /* Responsive */
@@ -165,6 +213,10 @@
   cursor: pointer;
   color: #374151;
   transition: transform 0.2s ease;
+}
+
+body.dark-mode .menu-toggle {
+  color: #f5f5f5;
 }
 
 .menu-toggle:hover {
@@ -186,6 +238,11 @@
     z-index: 150;
   }
 
+  body.dark-mode .navbar-links {
+    background: #2c2c3e;
+    border-top: 1px solid #444;
+  }
+
   .navbar-links.open {
     display: flex;
   }
@@ -194,6 +251,7 @@
     display: block;
   }
 }
+
 
 
 

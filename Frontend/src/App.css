@@ -1,38 +1,178 @@
-.App {
-  text-align: center;
+/* ====== Estilos globales ====== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #1e1e2f;
+  transition: all 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body.dark-mode {
+  background-color: #1e1e2f;
+  color: #f5f5f5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ====== Navbar ====== */
+.navbar {
+  height: 60px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background-color: #ffffff;
+  color: #1e1e2f;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.App-link {
-  color: #61dafb;
+body.dark-mode .navbar {
+  background-color: #2c2c3e;
+  color: #f5f5f5;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.navbar-links a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar-links a:hover {
+  color: #007bff;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-menu .dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #ffffff;
+  color: #1e1e2f;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 0.5rem 0;
+  min-width: 200px;
+  z-index: 1001;
+}
+
+body.dark-mode .user-menu .dropdown {
+  background-color: #2c2c3e;
+  color: #f5f5f5;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #1e1e2f;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+body.dark-mode .sidebar {
+  background-color: #2c2c3e;
+  color: #f5f5f5;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.sidebar .menu-links li {
+  list-style: none;
+}
+
+.sidebar .menu-links li a {
+  display: block;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s ease;
+}
+
+.sidebar .menu-links li a:hover {
+  background-color: rgba(0,123,255,0.1);
+  border-radius: 6px;
+}
+
+body.dark-mode .sidebar .menu-links li a:hover {
+  background-color: rgba(0,123,255,0.2);
+}
+
+/* ====== Toggle Switch del modo oscuro ====== */
+.mode {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.toggle-switch {
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+body.dark-mode .toggle-switch {
+  background-color: #555;
+}
+
+.switch {
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .switch {
+  left: 21px;
+}
+
+/* ====== General ====== */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
