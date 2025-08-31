@@ -1,0 +1,102 @@
+.pendientes-container {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .pendientes-container {
+  background: #2c2c3e;
+  color: #f5f5f5;
+}
+
+.pendientes-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1e1e2f;
+}
+
+body.dark-mode .pendientes-container h2 {
+  color: #f5f5f5;
+}
+
+.no-pendientes {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1rem;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+body.dark-mode .no-pendientes {
+  background: #3c3c58;
+  color: #f5f5f5;
+}
+
+/* Tabla */
+.tabla-pendientes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-pendientes th,
+.tabla-pendientes td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+body.dark-mode .tabla-pendientes th,
+body.dark-mode .tabla-pendientes td {
+  border-bottom: 1px solid #555;
+}
+
+.tabla-pendientes th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+body.dark-mode .tabla-pendientes th {
+  background: #3b3b4f;
+}
+
+.tabla-pendientes tr:hover {
+  background: #f3f4f6;
+}
+
+body.dark-mode .tabla-pendientes tr:hover {
+  background: #3c3c58;
+}
+
+/* Estados */
+.estado {
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  text-align: center;
+  width: fit-content;
+}
+
+.estado.pendiente {
+  background: #fef3c7;
+  color: #78350f;
+}
+
+body.dark-mode .estado.pendiente {
+  background: #78350f;
+  color: #fef3c7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabla-pendientes th,
+  .tabla-pendientes td {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
