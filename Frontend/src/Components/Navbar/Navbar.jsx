@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Sun, Moon, Menu, X, User, LogOut, Settings } from "lucide-react";
 import "./Navbar.css";
 
@@ -6,52 +6,14 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(250); // ancho inicial
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark-mode", !darkMode);
   };
 
-  // Función para detectar ancho del sidebar
-  const updateSidebarWidth = () => {
-    const sidebar = document.querySelector(".sidebar");
-    if (sidebar) {
-      const width = parseInt(window.getComputedStyle(sidebar).width);
-      setSidebarWidth(width);
-    }
-  };
-
-  useEffect(() => {
-    // Detectar al cargar
-    updateSidebarWidth();
-
-    const sidebar = document.querySelector(".sidebar");
-    if (!sidebar) return;
-
-    // Actualizar al terminar transición de ancho
-    const onTransitionEnd = (e) => {
-      if (e.propertyName === "width") updateSidebarWidth();
-    };
-
-    sidebar.addEventListener("transitionend", onTransitionEnd);
-
-    // Escuchar redimensionamiento de ventana
-    window.addEventListener("resize", updateSidebarWidth);
-
-    return () => {
-      sidebar.removeEventListener("transitionend", onTransitionEnd);
-      window.removeEventListener("resize", updateSidebarWidth);
-    };
-  }, []);
-
-  const navbarStyle = {
-    marginLeft: `${sidebarWidth}px`,
-    width: `calc(100% - ${sidebarWidth}px)`,
-  };
-
   return (
-    <nav className={`navbar ${darkMode ? "dark" : ""}`} style={navbarStyle}>
+    <nav className={`navbar ${darkMode ? "dark" : ""}`}>
       <div className="navbar-left">
         <span className="logo">UDH2024</span>
       </div>
@@ -64,12 +26,14 @@ export default function Navbar() {
       </div>
 
       <div className="navbar-right">
+        {/* Botón DarkMode */}
         <button onClick={toggleDarkMode} className="icon-btn">
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
 
+        {/* Menú de usuario */}
         <div className="user-menu">
-          <button 
+          <button
             className="user-btn"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
@@ -94,23 +58,25 @@ export default function Navbar() {
                 </div>
               </div>
               <hr />
-              <a href="#"><User size={16}/> Perfil</a>
-              <a href="#"><Settings size={16}/> Configuración</a>
-              <a href="#"><LogOut size={16}/> Cerrar sesión</a>
+              <a href="#"><User size={16} /> Perfil</a>
+              <a href="#"><Settings size={16} /> Configuración</a>
+              <a href="#"><LogOut size={16} /> Cerrar sesión</a>
             </div>
           )}
         </div>
 
-        <button 
+        {/* Menú responsive */}
+        <button
           className="menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <X size={24}/> : <Menu size={24}/>}
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
     </nav>
   );
 }
+
 
 
 

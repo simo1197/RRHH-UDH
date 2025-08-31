@@ -86,7 +86,7 @@
   align-items: center;
   justify-content: center;
   transition: right 0.18s ease, transform 0.18s ease;
-  z-index: 1100;
+  z-index: 20100;
 }
 
 /* Al colapsar, desplazar ligeramente MÁS a la derecha (solo un poquito) */
