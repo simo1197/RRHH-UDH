@@ -1,0 +1,130 @@
+/* --- Contenedor principal --- */
+.history-page {
+  padding: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f6fa;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* --- Títulos y subtítulos --- */
+.history-title {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.history-subtitle {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+/* --- Selectores --- */
+.selector-container {
+  margin-bottom: 1.5rem;
+}
+
+.selector-container label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.selector-container select {
+  padding: 0.5rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.selector-container select option {
+  background: #fff;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* --- Tabla de evaluaciones --- */
+.table-container {
+  margin-top: 2rem;
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+.history-table th {
+  background: #3498db;
+  color: white;
+  border-radius: 6px;
+}
+
+.history-table tr:nth-child(even) {
+  background: #ecf0f1;
+}
+
+/* --- Puntuaciones --- */
+.score-value {
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.score-value.good {
+  background: #27ae60;
+  color: white;
+}
+
+.score-value.medium {
+  background: #f39c12;
+  color: white;
+}
+
+.score-value.bad {
+  background: #e74c3c;
+  color: white;
+}
+
+/* --- MODO OSCURO --- */
+body.dark-mode .history-page {
+  background: #1e293b;
+  color: #f1f5f9;
+  font-weight: bold;
+}
+
+body.dark-mode .history-title,
+body.dark-mode .history-subtitle,
+body.dark-mode .history-table th,
+body.dark-mode .history-table td {
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .selector-container select {
+  background: #1f2937;
+  color: #f1f5f9;
+  border: 1px solid #4b5563;
+  font-weight: bold;
+}
+
+body.dark-mode .selector-container select option {
+  background: #1f2937;
+  color: #f1f5f9;
+  font-weight: bold;
+}
+
+body.dark-mode .history-table tr:nth-child(even) {
+  background: #111827;
+}

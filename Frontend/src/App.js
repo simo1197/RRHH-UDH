@@ -15,6 +15,9 @@ import SituacionView from './pages/SituacionView/SituacionView.jsx';
 import SolicitudView from './pages/SolicitudView/SolicitudView.jsx';
 import HistoriaLicencias from './pages/HistoriaLicencias/HistoriaLicencias.jsx';
 import PendientesAprobacion from './pages/PendientesAprobacion/PendientesAprobacion.jsx';
+import EvaluatePage from './pages/EvaluatePage/EvaluatePage.jsx';
+import EvaluateHistoryPage from './pages/EvaluateHistoryPage/EvaluateHistoryPage.jsx';
+
 
 function App() {
   return (
@@ -36,6 +39,8 @@ function App() {
           <Route path="/solicitudview" element={<SolicitudView />} />
           <Route path="/historialicencias" element={<HistoriaLicencias />} />
           <Route path="/pendientesaprobacion" element={<PendientesAprobacion />} />
+          <Route path="/evaluatepage" element={<EvaluatePage />} />
+          <Route path="/evaluatehistorypage" element={<EvaluateHistoryPage />} />
          
         </Routes>
       </BrowserRouter>
