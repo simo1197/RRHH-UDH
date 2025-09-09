@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; //  Importamos navegación
 import './Sidebar.css';
 import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
@@ -6,6 +7,7 @@ import 'boxicons/css/boxicons.min.css';
 const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
   const [openMenu, setOpenMenu] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate(); //  Hook para redirección
 
   useEffect(() => {
     if (darkMode) {
@@ -25,6 +27,17 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
   };
 
   const toggleDarkMode = () => setDarkMode(prev => !prev);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    const confirmLogout = window.confirm("¿Desea cerrar sesión?");
+    if (confirmLogout) {
+      // Limpia sesión o token si usas alguno
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/", { replace: true }); //  Redirige al LoginPage en "/"
+    }
+  };
 
   return (
     <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
@@ -70,7 +83,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                 <ul className={`submenu ${openMenu === 'personal' ? 'open' : ''}`}>
                   <li><a href="#" onClick={(e)=>e.preventDefault()}>Lista de personal</a></li>
                   <li><a href="#" onClick={(e)=>e.preventDefault()}>Registrar personal</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Editar / Actualizar datos</a></li>
                 </ul>
               </li>
 
@@ -139,7 +151,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                 </div>
                 <ul className={`submenu ${openMenu === 'biblioteca' ? 'open' : ''}`}>
                   <li><a href="#" onClick={(e)=>e.preventDefault()}>Documentos</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Subir documento</a></li>
                 </ul>
               </li>
 
@@ -159,14 +170,13 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   <li><a href="#" onClick={(e)=>e.preventDefault()}>Filtrar por usuario</a></li>
                 </ul>
               </li>
-
             </ul>
           </div>
 
           {/* ====== BOTTOM CONTENT ====== */}
           <div className="bottom-content">
             <li className="logout">
-              <a href="#" onClick={(e)=>{ e.preventDefault(); }}>
+              <a href="#" onClick={handleLogout}>
                 <i className='bx bx-log-out icon' />
                 <span className="text nav-text">Salir</span>
               </a>
@@ -186,7 +196,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
               </div>
             </li>
           </div>
-
         </div>
       </nav>
     </div>
@@ -194,3 +203,5 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
 };
 
 export default Sidebar;
+
+
