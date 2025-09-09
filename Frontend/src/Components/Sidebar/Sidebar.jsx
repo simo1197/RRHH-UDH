@@ -4,10 +4,10 @@ import './Sidebar.css';
 import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
 
-const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
+const Sidebar = ({ collapsed, setCollapsed }) => { 
   const [openMenu, setOpenMenu] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const navigate = useNavigate(); //  Hook para redirección
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (darkMode) {
@@ -19,7 +19,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
 
   const toggleSidebar = () => {
     if (!collapsed) setOpenMenu(null);
-    setCollapsed(prev => !prev); // Cambia el estado compartido
+    setCollapsed(prev => !prev); 
   };
 
   const toggleSubMenu = (menu) => {
@@ -32,10 +32,9 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
     e.preventDefault();
     const confirmLogout = window.confirm("¿Desea cerrar sesión?");
     if (confirmLogout) {
-      // Limpia sesión o token si usas alguno
       localStorage.clear();
       sessionStorage.clear();
-      navigate("/", { replace: true }); //  Redirige al LoginPage en "/"
+      navigate("/", { replace: true }); 
     }
   };
 
@@ -69,6 +68,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
         <div className="menu-bar">
           <div className="menu">
             <ul className="menu-links">
+
               {/* PERSONAL */}
               <li className={`menu-item ${openMenu === 'personal' ? 'open' : ''}`}>
                 <div
@@ -81,8 +81,8 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   {!collapsed && <i className="bx bx-chevron-down arrow" />}
                 </div>
                 <ul className={`submenu ${openMenu === 'personal' ? 'open' : ''}`}>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Lista de personal</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Registrar personal</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/viewpersonal"); }}>Lista de personal</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/regpersonal"); }}>Registrar personal</a></li>
                 </ul>
               </li>
 
@@ -98,9 +98,9 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   {!collapsed && <i className="bx bx-chevron-down arrow" />}
                 </div>
                 <ul className={`submenu ${openMenu === 'licencias' ? 'open' : ''}`}>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Solicitar licencia</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Historial de licencias</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Aprobaciones pendientes</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/solicitudview"); }}>Solicitar licencia</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/historialicencias"); }}>Historial de licencias</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/pendientesaprobacion"); }}>Aprobaciones pendientes</a></li>
                 </ul>
               </li>
 
@@ -116,8 +116,8 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   {!collapsed && <i className="bx bx-chevron-down arrow" />}
                 </div>
                 <ul className={`submenu ${openMenu === 'evaluaciones' ? 'open' : ''}`}>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Evaluar personal</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Resultados de evaluaciones</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/evaluatepage"); }}>Evaluar personal</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/evaluatehistorypage"); }}>Resultados de evaluaciones</a></li>
                 </ul>
               </li>
 
@@ -133,7 +133,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   {!collapsed && <i className="bx bx-chevron-down arrow" />}
                 </div>
                 <ul className={`submenu ${openMenu === 'servicio' ? 'open' : ''}`}>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Matriz de situación</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/situacionview"); }}>Matriz de situación</a></li>
                   <li><a href="#" onClick={(e)=>e.preventDefault()}>Asignar situación</a></li>
                 </ul>
               </li>
@@ -150,7 +150,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   {!collapsed && <i className="bx bx-chevron-down arrow" />}
                 </div>
                 <ul className={`submenu ${openMenu === 'biblioteca' ? 'open' : ''}`}>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Documentos</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/biblioteca"); }}>Documentos</a></li>
                 </ul>
               </li>
 
@@ -166,10 +166,11 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
                   {!collapsed && <i className="bx bx-chevron-down arrow" />}
                 </div>
                 <ul className={`submenu ${openMenu === 'bitacora' ? 'open' : ''}`}>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Ver bitácora completa</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/bitacora"); }}>Ver bitácora completa</a></li>
                   <li><a href="#" onClick={(e)=>e.preventDefault()}>Filtrar por usuario</a></li>
                 </ul>
               </li>
+
             </ul>
           </div>
 
@@ -203,5 +204,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => { // Recibe props desde Layout
 };
 
 export default Sidebar;
+
 
 
