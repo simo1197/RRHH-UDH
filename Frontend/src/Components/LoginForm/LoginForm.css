@@ -1,56 +1,116 @@
+/* Fondo completo */
+.login-background {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/* Contenedor principal */
+.starry-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: radial-gradient(circle, #f3d27d 0%, rgba(255,215,180,0) 70%);
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.2; transform: scale(0.5); }
+}
+
+.star-large {
+    position: absolute;
+    background: radial-gradient(circle, #f3e28a 0%, rgba(255,230,150,0) 70%);
+    border-radius: 50%;
+    animation: starMove 20s linear infinite, starTwinkle 3s infinite alternate;
+}
+
+@keyframes starMove {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-10px) translateX(5px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes starTwinkle {
+    0% { opacity: 0.3; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* Contenedor central */
 .wrapper-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    z-index: 1;
     padding: 20px;
-    height: 100vh; /* Para asegurar que se ocupa toda la altura de la pantalla */
+    width: 100%;
 }
 
-/* Contenedor de la imagen */
 .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px; /* Espacio entre la imagen y el formulario */
+    margin-bottom: 30px;
 }
-
-.image-container img {
-    width: 50%; 
-    max-width: 400px; 
-    height: auto; 
-} 
-
 
 .login-image {
     width: 100%;
-    max-width: 250px; /* Establece un tamaño máximo para la imagen */
+    max-width: 250px;
     height: auto;
 }
 
-/* Estilos del contenedor del formulario */
-.wrapper {
+/* Formulario con borde animado solo en la línea */
+.wrapper.glowing-border {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 420px;
-    background: transparent;
-    /* border: 2px solid rgba(255, 255, 255, 0.2); */
-    border: 2px solid #EE952480;
-    backdrop-filter: blur(30px);
-    box-shadow: 0 0 10px #EE952480;
-    color: aliceblue;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 30px 40px;
+    background: rgba(0,0,0,0.6);
+    color: aliceblue;
+    overflow: hidden;
+    border: 2px solid rgba(224,196,110,0.6);
 }
 
-/* Título del formulario */
+/* Borde animado solo alrededor del formulario */
+.wrapper.glowing-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Ajusta al borde */
+    border-radius: 14px;
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #ffd700, #ffe066, #ffd700) 1;
+    animation: borderGlow 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes borderGlow {
+    0% { border-image-source: linear-gradient(90deg, #ffd700, #ffe066, #ffd700); }
+    50% { border-image-source: linear-gradient(270deg, #ffd700, #ffe066, #ffd700); }
+    100% { border-image-source: linear-gradient(90deg, #ffd700, #ffe066, #ffd700); }
+}
+
 .wrapper h1 {
     font-size: 36px;
     text-align: center;
+    color: #f1d98a;
+    text-shadow: 0 0 15px #e0c46e;
 }
 
-/* Estilos para los inputs */
 .wrapper .input-box {
     position: relative;
     width: 100%;
@@ -62,14 +122,12 @@
     width: 100%;
     height: 100%;
     background: transparent;
-    border: none;
-    outline: none;
-    /* border: 2px solid rgba(255, 255, 255, 0.2); */
-    border: 2px solid #EE952480;
+    border: 2px solid rgba(224,196,110,0.6);
     border-radius: 40px;
     font-size: 16px;
     color: aliceblue;
     padding: 20px 45px 20px 20px;
+    outline: none;
 }
 
 .input-box input::placeholder {
@@ -78,67 +136,48 @@
 
 .input-box .icon {
     position: absolute;
-    right: 20px;
+    right: 45px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
+    color: #f1d98a;
 }
 
-/* Enlace de "olvidaste contraseña" */
-.wrapper .forgot-password {
-    text-align: right;
-    margin-bottom: 10px;
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #f1d98a;
+    cursor: pointer;
 }
 
-/* Enlaces */
-.wrapper a {
-    color: aliceblue;
-    text-decoration: none;
-}
-
-.wrapper a:hover {
-    text-decoration: underline;
-}
-
-/* Estilos del formulario */
-.wrapper form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-/* Estilos del botón */
 .wrapper button {
     width: 100%;
-    max-width: 400px;
     height: 45px;
-    background: aliceblue;
+    background: #f1d98a;
     border: none;
     outline: none;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(224,196,110,0.4);
     cursor: pointer;
     font-size: 16px;
-    color: #333;
-    font-weight: 700;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.wrapper button:hover{
-    background: #f3ab03;
     color: #242C42;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Estilos responsivos */
+.wrapper button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #e0c46e;
+}
+
 @media (max-width: 768px) {
     .wrapper {
         width: 90%;
         padding: 20px;
     }
-
     .login-image {
         max-width: 200px;
     }
@@ -149,22 +188,30 @@
         width: 95%;
         padding: 15px;
     }
-
     .login-image {
         max-width: 150px;
     }
-
     .wrapper h1 {
         font-size: 28px;
     }
-
     .input-box input {
         font-size: 14px;
     }
-
     .wrapper button {
         height: 40px;
         font-size: 14px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
