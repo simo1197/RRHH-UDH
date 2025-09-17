@@ -17,6 +17,7 @@ import HistoriaLicencias from './pages/HistoriaLicencias/HistoriaLicencias.jsx';
 import PendientesAprobacion from './pages/PendientesAprobacion/PendientesAprobacion.jsx';
 import EvaluatePage from './pages/EvaluatePage/EvaluatePage.jsx';
 import EvaluateHistoryPage from './pages/EvaluateHistoryPage/EvaluateHistoryPage.jsx';
+import SituacionesPage from './pages/SituacionesPage/SituacionesPage.jsx';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/pendientesaprobacion" element={<PendientesAprobacion />} />
           <Route path="/evaluatepage" element={<EvaluatePage />} />
           <Route path="/evaluatehistorypage" element={<EvaluateHistoryPage />} />
+          <Route path="/situacionespage" element={<SituacionesPage />} />
          
         </Routes>
       </BrowserRouter>
