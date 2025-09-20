@@ -6,7 +6,9 @@ import 'boxicons/css/boxicons.min.css';
 
 const Sidebar = ({ collapsed, setCollapsed }) => { 
   const [openMenu, setOpenMenu] = useState(null);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    () => JSON.parse(localStorage.getItem("darkMode")) || false
+  );
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -15,6 +17,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
     } else {
       document.body.classList.remove('dark-mode');
     }
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
 
   const toggleSidebar = () => {
@@ -200,5 +203,3 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 };
 
 export default Sidebar;
-
-
