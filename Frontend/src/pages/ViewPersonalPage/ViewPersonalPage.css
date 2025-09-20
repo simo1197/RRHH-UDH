@@ -92,3 +92,42 @@
 .btn-eliminar:hover {
   background: #c0392b;
 }
+
+/* ========  MODO OSCURO ======== */
+body.dark-mode .viewpersonal-page {
+  background: #1e1e1e;
+}
+
+body.dark-mode .viewpersonal-title {
+  color: #f1f1f1;
+}
+
+body.dark-mode .viewpersonal-subtitle {
+  color: #ccc;
+}
+
+body.dark-mode .table-container {
+  background: #2b2b2b;
+  box-shadow: 0 4px 8px rgba(255,255,255,0.05);
+}
+
+body.dark-mode .personal-table thead {
+  background: #2980b9; /* se mantiene azul */
+  color: #fff;
+}
+
+body.dark-mode .personal-table th,
+body.dark-mode .personal-table td {
+  color: #f1f1f1;
+  border-bottom: 1px solid #444;
+}
+
+body.dark-mode .personal-table tbody tr:hover {
+  background: #333a44;
+}
+
+body.dark-mode .btn-ver,
+body.dark-mode .btn-editar,
+body.dark-mode .btn-eliminar {
+  color: #fff;
+}

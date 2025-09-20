@@ -1,14 +1,14 @@
-.situacion-container {
+.situacion-page {
   padding: 20px;
-  background: #f8f9fc;
   min-height: 100vh;
+  background: var(--bg-color);
 }
 
 .situacion-title {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text-color);
   font-weight: bold;
 }
 
@@ -19,21 +19,22 @@
 .situacion-table {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .situacion-table th,
 .situacion-table td {
-  border: 1px solid #dfe6e9;
+  border: 1px solid var(--border-color);
   padding: 10px;
   text-align: center;
+  color: var(--text-color);
 }
 
 .situacion-table th {
-  background: #34495e;
-  color: #fff;
+  background: var(--header-bg);
+  color: var(--header-color);
   font-weight: 600;
   font-size: 14px;
 }
@@ -46,15 +47,44 @@
   padding: 5px;
   background: transparent;
   font-size: 14px;
+  color: var(--text-color);
 }
 
 .situacion-table td input:focus {
-  background: #ecf0f1;
+  background: var(--input-focus-bg);
   border-radius: 6px;
 }
 
 .totales-row {
-  background: #2ecc71;
-  color: #fff;
+  background: var(--totales-bg);
+  color: var(--totales-color);
   font-weight: bold;
 }
+
+/* Variables para modo día/noche */
+:root {
+  --bg-color: #f8f9fc;
+  --card-bg: #fff;
+  --text-color: #2c3e50;
+  --border-color: #dfe6e9;
+  --header-bg: #34495e;
+  --header-color: #fff;
+  --input-focus-bg: #ecf0f1;
+  --totales-bg: #2ecc71;
+  --totales-color: #fff;
+}
+
+body.dark-mode {
+  --bg-color: #1f2a38;
+  --card-bg: #2c3e50;
+  --text-color: #ecf0f1;
+  --border-color: #34495e;
+  --header-bg: #1a252f;
+  --header-color: #ecf0f1;
+  --input-focus-bg: #3b4a5a;
+  --totales-bg: #27ae60;
+  --totales-color: #fff;
+}
+
+
+

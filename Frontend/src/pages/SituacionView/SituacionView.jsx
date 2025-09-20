@@ -44,7 +44,7 @@ const SituacionView = () => {
   return (
     <Layout userType="admin">
       <div className="situacion-page">
-        <h1>📊 Situación de Personal</h1>
+        <h1 className="situacion-title">📊 Situación de Personal</h1>
         <div className="tabla-wrapper">
           <table className="situacion-table">
             <thead>

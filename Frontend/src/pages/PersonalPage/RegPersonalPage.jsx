@@ -24,7 +24,6 @@ const RegPersonalPage = () => {
     e.preventDefault();
     console.log("Datos registrados:", formData);
     alert("Personal registrado con éxito");
-    // Aquí después se hará el POST al backend
     setFormData({
       nombre: "",
       apellido: "",
@@ -138,3 +137,4 @@ const RegPersonalPage = () => {
 };
 
 export default RegPersonalPage;
+
