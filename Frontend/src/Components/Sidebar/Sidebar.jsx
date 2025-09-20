@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; //  Importamos navegación
+import { useNavigate } from "react-router-dom"; 
 import './Sidebar.css';
 import imgLogo from '../../Assets/LOGOUDH.png';
 import 'boxicons/css/boxicons.min.css';
@@ -41,7 +41,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
   return (
     <div className={`mi-componente ${darkMode ? "dark" : ""}`}>
       <nav className={`sidebar ${collapsed ? "collapsed" : ""}`}>
-        {/* ====== HEADER ====== */}
         <header>
           <div className="image-text">
             <span className="image">
@@ -64,7 +63,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           </div>
         </header>
 
-        {/* ====== MENÚ PRINCIPAL ====== */}
         <div className="menu-bar">
           <div className="menu">
             <ul className="menu-links">
@@ -134,7 +132,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 </div>
                 <ul className={`submenu ${openMenu === 'servicio' ? 'open' : ''}`}>
                   <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/situacionview"); }}>Matriz de situación</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Asignar situación</a></li>
+                  <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/situacionespage"); }}>Asignar situación</a></li>
                 </ul>
               </li>
 
@@ -167,14 +165,12 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 </div>
                 <ul className={`submenu ${openMenu === 'bitacora' ? 'open' : ''}`}>
                   <li><a href="#" onClick={(e)=>{ e.preventDefault(); navigate("/bitacora"); }}>Ver bitácora completa</a></li>
-                  <li><a href="#" onClick={(e)=>e.preventDefault()}>Filtrar por usuario</a></li>
                 </ul>
               </li>
 
             </ul>
           </div>
 
-          {/* ====== BOTTOM CONTENT ====== */}
           <div className="bottom-content">
             <li className="logout">
               <a href="#" onClick={handleLogout}>
@@ -204,6 +200,5 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 };
 
 export default Sidebar;
-
 
 
