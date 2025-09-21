@@ -42,10 +42,10 @@ const ViewPersonalPage = () => {
                   <td>{p.fechaIngreso}</td>
                   <td>{p.correo}</td>
                   <td>{p.telefono}</td>
-                  <td>
-                    <button className="btn-ver">👁 Ver</button>
-                    <button className="btn-editar">✏ Editar</button>
-                    <button className="btn-eliminar">🗑 Eliminar</button>
+                  <td className="acciones">
+                    <button className="btn-ver">👁</button>
+                    <button className="btn-editar">✏</button>
+                    <button className="btn-eliminar">🗑</button>
                   </td>
                 </tr>
               ))}
@@ -58,4 +58,7 @@ const ViewPersonalPage = () => {
 };
 
 export default ViewPersonalPage;
+
+
+
 

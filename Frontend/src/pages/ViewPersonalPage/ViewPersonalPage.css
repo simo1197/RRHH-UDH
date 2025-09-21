@@ -57,15 +57,18 @@
   text-align: center;
 }
 
-.btn-ver,
-.btn-editar,
-.btn-eliminar {
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
+/* Botones de acción cuadrados */
+.acciones button {
+  width: 36px;     /* ancho fijo */
+  height: 36px;    /* alto fijo */
+  padding: 0;      /* quitar padding extra para cuadrado perfecto */
+  border-radius: 6px; /* borde uniforme */
   margin: 0 3px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 
@@ -126,8 +129,11 @@ body.dark-mode .personal-table tbody tr:hover {
   background: #333a44;
 }
 
-body.dark-mode .btn-ver,
-body.dark-mode .btn-editar,
-body.dark-mode .btn-eliminar {
+body.dark-mode .acciones button {
   color: #fff;
 }
+
+
+
+
+
