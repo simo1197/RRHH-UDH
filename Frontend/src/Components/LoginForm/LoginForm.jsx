@@ -21,9 +21,7 @@ const LoginForm = () => {
         try {
             const response = await fetch('http://127.0.0.1:8000/login', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ usuario, password })
             });
 
@@ -44,21 +42,21 @@ const LoginForm = () => {
     return (
         <div className="login-background">
             <div className="starry-background">
-                {Array.from({ length: 500 }).map((_, i) => (  /* Reducido a 500 */
+                {Array.from({ length: 250 }).map((_, i) => (  /* Reducido a 250 */
                     <span key={`star-small-${i}`} className="star" style={{
                         top: `${Math.random() * 100}%`,
                         left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 8}s`,  /* más suave */
-                        width: `${Math.random() * 2 + 1}px`,      /* más pequeño */
+                        animationDelay: `${Math.random() * 8}s`,
+                        width: `${Math.random() * 2 + 1}px`,
                         height: `${Math.random() * 2 + 1}px`,
                     }} />
                 ))}
-                {Array.from({ length: 8 }).map((_, i) => (  /* Reducido a 8 */
+                {Array.from({ length: 4 }).map((_, i) => (  /* Reducido a 4 */
                     <span key={`star-large-${i}`} className="star-large" style={{
                         top: `${Math.random() * 100}%`,
                         left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 15}s`, /* más suave */
-                        width: `${Math.random() * 4 + 2}px`,      /* más pequeño */
+                        animationDelay: `${Math.random() * 15}s`,
+                        width: `${Math.random() * 4 + 2}px`,
                         height: `${Math.random() * 4 + 2}px`,
                     }} />
                 ))}
@@ -72,7 +70,6 @@ const LoginForm = () => {
                 <div className="wrapper glowing-border">
                     <form onSubmit={handleSubmit}>
                         <h1>Bienvenido</h1>
-
                         {error && <p style={{ color: 'red' }}>{error}</p>}
 
                         <div className="input-box">
@@ -113,6 +110,7 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
 
 
 
