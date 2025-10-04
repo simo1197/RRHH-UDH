@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import mysql.connector
 import bcrypt
@@ -8,12 +9,27 @@ from datetime import datetime, timedelta
 app = FastAPI(title="UDH2024 Backend - Login")
 
 # -------------------------------
+# CONFIGURACIÓN CORS
+# -------------------------------
+origins = [
+    "http://localhost:3000",  # URL de tu frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# -------------------------------
 # CONFIGURACIÓN DE LA BASE DE DATOS
 # -------------------------------
 db_config = {
     "host": "localhost",
-    "user": "root",           # Cambia aquí tu usuario de MySQL
-    "password": "@Aubameyang123",# Cambia aquí tu contraseña de MySQL
+    "user": "root",           
+    "password": "@Aubameyang123",
     "database": "UDH2024"
 }
 
@@ -27,7 +43,7 @@ class LoginModel(BaseModel):
 # -------------------------------
 # CONFIGURACIÓN JWT
 # -------------------------------
-SECRET_KEY = "mi_clave_ultra_secreta_1234567890"   # Cambia por una cadena larga y secreta
+SECRET_KEY = "mi_clave_ultra_secreta_1234567890"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
@@ -37,22 +53,18 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 @app.post("/login")
 def login(data: LoginModel):
     try:
-        # Conectar a la base de datos
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor(dictionary=True)
         
-        # Buscar usuario en la DB
         cursor.execute("SELECT * FROM usuarios WHERE USUARIO = %s", (data.usuario,))
         user = cursor.fetchone()
         
         if not user:
             raise HTTPException(status_code=401, detail="Usuario no encontrado")
         
-        # Verificar contraseña con bcrypt
         if not bcrypt.checkpw(data.password.encode('utf-8'), user['PASSWORD'].encode('utf-8')):
             raise HTTPException(status_code=401, detail="Contraseña incorrecta")
         
-        # Crear token JWT
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
         token_data = {"sub": user['USUARIO'], "rol": user['ROL'], "exp": expire}
         token = jwt.encode(token_data, SECRET_KEY, algorithm=ALGORITHM)
@@ -69,3 +81,4 @@ def login(data: LoginModel):
 @app.get("/")
 def root():
     return {"message": "Backend UDH2024 funcionando correctamente"}
+

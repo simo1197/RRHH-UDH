@@ -6,9 +6,40 @@ import imgLogo from '../../Assets/udhogobco.png';
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [usuario, setUsuario] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usuario, password })
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                setError(data.detail || 'Error en el login');
+                return;
+            }
+
+            const data = await response.json();
+            // Guardar token JWT en localStorage
+            localStorage.setItem('token', data.access_token);
+            alert('Login exitoso!'); // Aquí puedes redirigir al dashboard o página principal
+        } catch (err) {
+            setError('No se pudo conectar al servidor');
+        }
     };
 
     return (
@@ -40,11 +71,19 @@ const LoginForm = () => {
                 </div>
 
                 <div className="wrapper glowing-border">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <h1>Bienvenido</h1>
 
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+
                         <div className="input-box">
-                            <input type="text" placeholder="Usuario" required />
+                            <input
+                                type="text"
+                                placeholder="Usuario"
+                                value={usuario}
+                                onChange={(e) => setUsuario(e.target.value)}
+                                required
+                            />
                             <FaUser className="icon" />
                         </div>
 
@@ -52,6 +91,8 @@ const LoginForm = () => {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Contraseña"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                             <FaLock className="icon" />
