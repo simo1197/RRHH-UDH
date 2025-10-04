@@ -1,6 +1,6 @@
 # Backend/hash_password.py
 # Script para actualizar/crear usuario con contraseña hasheada (bcrypt)
-# Úsalo desde terminal: python hash_password.py
+#  se usa Úsalo terminal: python hash_password.py
 
 from db_config import db_config
 import mysql.connector
