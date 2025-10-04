@@ -34,9 +34,8 @@ const LoginForm = () => {
             }
 
             const data = await response.json();
-            // Guardar token JWT en localStorage
             localStorage.setItem('token', data.access_token);
-            alert('Login exitoso!'); // Aquí puedes redirigir al dashboard o página principal
+            alert('Login exitoso!');
         } catch (err) {
             setError('No se pudo conectar al servidor');
         }
@@ -45,22 +44,22 @@ const LoginForm = () => {
     return (
         <div className="login-background">
             <div className="starry-background">
-                {Array.from({ length: 2000 }).map((_, i) => (
+                {Array.from({ length: 500 }).map((_, i) => (  /* Reducido a 500 */
                     <span key={`star-small-${i}`} className="star" style={{
                         top: `${Math.random() * 100}%`,
                         left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 5}s`,
-                        width: `${Math.random() * 3 + 2}px`,
-                        height: `${Math.random() * 3 + 2}px`,
+                        animationDelay: `${Math.random() * 8}s`,  /* más suave */
+                        width: `${Math.random() * 2 + 1}px`,      /* más pequeño */
+                        height: `${Math.random() * 2 + 1}px`,
                     }} />
                 ))}
-                {Array.from({ length: 30 }).map((_, i) => (
+                {Array.from({ length: 8 }).map((_, i) => (  /* Reducido a 8 */
                     <span key={`star-large-${i}`} className="star-large" style={{
                         top: `${Math.random() * 100}%`,
                         left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 10}s`,
-                        width: `${Math.random() * 6 + 3}px`,
-                        height: `${Math.random() * 6 + 3}px`,
+                        animationDelay: `${Math.random() * 15}s`, /* más suave */
+                        width: `${Math.random() * 4 + 2}px`,      /* más pequeño */
+                        height: `${Math.random() * 4 + 2}px`,
                     }} />
                 ))}
             </div>
@@ -114,6 +113,7 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
 
 
 
