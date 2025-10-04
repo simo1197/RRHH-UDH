@@ -50,7 +50,6 @@ def login(data: LoginModel):
     try:
         conn = mysql.connector.connect(**db_config)
     except MySQLError as e:
-        # Error de conexión a la DB -> 500
         raise HTTPException(status_code=500, detail=f"DB connection error: {e}")
 
     cursor = None
@@ -73,7 +72,6 @@ def login(data: LoginModel):
                 break
 
         if not pw_field:
-            # No se encontró campo conocido de contraseña
             raise HTTPException(status_code=500, detail="Usuario no tiene contraseña almacenada")
 
         hashed_pw = user.get(pw_field)
@@ -81,14 +79,8 @@ def login(data: LoginModel):
             raise HTTPException(status_code=500, detail="Usuario no tiene contraseña almacenada")
 
         # Verificar contraseña (bcrypt)
-        try:
-            if not bcrypt.checkpw(data.password.encode('utf-8'), str(hashed_pw).encode('utf-8')):
-                raise HTTPException(status_code=401, detail="Contraseña incorrecta")
-        except ValueError:
-            # Error al interpretar el hash
-            raise HTTPException(status_code=500, detail="Hash de contraseña inválido")
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Error verificando contraseña: {e}")
+        if not bcrypt.checkpw(data.password.encode('utf-8'), str(hashed_pw).encode('utf-8')):
+            raise HTTPException(status_code=401, detail="Contraseña incorrecta")
 
         # Generar token
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -119,6 +111,7 @@ def login(data: LoginModel):
 @app.get("/")
 def root():
     return {"message": "Backend UDH2024 funcionando correctamente"}
+
 
 
 
