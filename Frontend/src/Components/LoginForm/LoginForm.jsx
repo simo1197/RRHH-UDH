@@ -3,12 +3,14 @@ import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import imgLogo from '../../Assets/udhogobco.png';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -25,24 +27,24 @@ const LoginForm = () => {
                 body: JSON.stringify({ usuario, password })
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                const data = await response.json();
-                setError(data.detail || 'Error en el login');
+                setError(data.detail || 'Usuario o contraseña incorrectos');
                 return;
             }
 
-            const data = await response.json();
             localStorage.setItem('token', data.access_token);
-            alert('Login exitoso!');
+            navigate('/admin'); // 🔹 Redirige al panel admin
         } catch (err) {
-            setError('No se pudo conectar al servidor');
+            setError('Error de conexión con el servidor');
         }
     };
 
     return (
         <div className="login-background">
             <div className="starry-background">
-                {Array.from({ length: 250 }).map((_, i) => (  /* Reducido a 250 */
+                {Array.from({ length: 250 }).map((_, i) => (
                     <span key={`star-small-${i}`} className="star" style={{
                         top: `${Math.random() * 100}%`,
                         left: `${Math.random() * 100}%`,
@@ -51,7 +53,7 @@ const LoginForm = () => {
                         height: `${Math.random() * 2 + 1}px`,
                     }} />
                 ))}
-                {Array.from({ length: 4 }).map((_, i) => (  /* Reducido a 4 */
+                {Array.from({ length: 4 }).map((_, i) => (
                     <span key={`star-large-${i}`} className="star-large" style={{
                         top: `${Math.random() * 100}%`,
                         left: `${Math.random() * 100}%`,
@@ -70,7 +72,12 @@ const LoginForm = () => {
                 <div className="wrapper glowing-border">
                     <form onSubmit={handleSubmit}>
                         <h1>Bienvenido</h1>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
+
+                        {error && (
+                            <div className="error-message">
+                                ⚠️ {error}
+                            </div>
+                        )}
 
                         <div className="input-box">
                             <input
@@ -110,6 +117,7 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
 
 
 
