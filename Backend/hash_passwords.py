@@ -1,53 +1,50 @@
+# Backend/hash_password.py
+# Script para actualizar/crear usuario con contraseña hasheada (bcrypt)
+# Úsalo desde terminal: python hash_password.py
+
+from db_config import db_config
 import mysql.connector
 import bcrypt
+from mysql.connector import Error as MySQLError
 
-# -------------------------------
-# CONFIGURACIÓN DE LA BASE DE DATOS
-# -------------------------------
-db_config = {
-    "host": "localhost",
-    "user": "root",                  # Cambia si tu usuario es diferente
-    "password": "@RRHH2024GDZ",    # Tu contraseña MySQL
-    "database": "UDH2024"
-}
+usuario = input("👉 Ingresa el nombre de usuario: ").strip()
+nueva_password = input("👉 Ingresa la nueva contraseña en texto plano: ").strip()
 
-# -------------------------------
-# INGRESO DE DATOS
-# -------------------------------
-usuario = input("👉 Ingresa el nombre de usuario: ")
-nueva_password = input("👉 Ingresa la nueva contraseña en texto plano: ")
-
-# -------------------------------
-# ACTUALIZACIÓN O INSERCIÓN
-# -------------------------------
+conn = None
+cursor = None
 try:
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
 
-    # Crear hash de la nueva contraseña
-    hashed = bcrypt.hashpw(nueva_password.encode('utf-8'), bcrypt.gensalt())
+    # Crear hash
+    hashed = bcrypt.hashpw(nueva_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-    # Intentar actualizar primero
+    # Primero intentar actualizar existente
     cursor.execute(
         "UPDATE usuarios SET password = %s WHERE usuario = %s",
-        (hashed.decode('utf-8'), usuario)
+        (hashed, usuario)
     )
     conn.commit()
 
     if cursor.rowcount > 0:
         print(f"✅ Contraseña actualizada con bcrypt para el usuario '{usuario}'")
     else:
-        # Si no existe, insertamos el usuario
+        # Si no existe, insertarlo
         cursor.execute(
             "INSERT INTO usuarios (usuario, password) VALUES (%s, %s)",
-            (usuario, hashed.decode('utf-8'))
+            (usuario, hashed)
         )
         conn.commit()
         print(f"🆕 Usuario '{usuario}' creado con contraseña encriptada.")
 
-    cursor.close()
-    conn.close()
+except MySQLError as e:
+    print("❌ Error de DB:", e)
 
-except Exception as e:
-    print("❌ Error al actualizar/crear el usuario:", e)
-
+finally:
+    try:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+    except:
+        pass

@@ -1,3 +1,4 @@
+// Frontend/src/Components/LoginForm/LoginForm.jsx
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa6";
@@ -27,16 +28,25 @@ const LoginForm = () => {
                 body: JSON.stringify({ usuario, password })
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-                setError(data.detail || 'Usuario o contraseña incorrectos');
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('token', data.access_token);
+                navigate('/admin');
                 return;
             }
 
-            localStorage.setItem('token', data.access_token);
-            navigate('/admin'); // 🔹 Redirige al panel admin
+            // Si no OK, intentar leer JSON de error
+            let errDetail = 'Usuario o contraseña incorrectos';
+            try {
+                const errJson = await response.json();
+                errDetail = errJson.detail || errDetail;
+            } catch (parseErr) {
+                // si no es JSON dejamos el mensaje por defecto
+            }
+            setError(errDetail);
+
         } catch (err) {
+            console.error('Fetch error:', err);
             setError('Error de conexión con el servidor');
         }
     };
@@ -117,8 +127,6 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-
 
 
 
