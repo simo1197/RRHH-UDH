@@ -7,7 +7,7 @@ import bcrypt
 db_config = {
     "host": "localhost",
     "user": "root",                  # Cambia si tu usuario es diferente
-    "password": "@Aubameyang123",    # Tu contraseña MySQL
+    "password": "@RRHH2024GDZ",    # Tu contraseña MySQL
     "database": "UDH2024"
 }
 
