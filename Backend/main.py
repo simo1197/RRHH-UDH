@@ -5,10 +5,9 @@ Endpoints:
  - POST /login  -> recibe { usuario, password } y devuelve JWT (sub=usuario, user_id, roles)
  - GET  /whoami -> header Authorization: Bearer <token> devuelve sub (usuario)
 
-Comportamiento:
- - Si hay problema de conexión a la BD devuelve 503 con detalle en español.
- - Si usuario no existe => 401 "Usuario no encontrado".
- - Si contraseña incorrecta => 401 "Contraseña incorrecta".
+Añadidos:
+ - POST /users  -> crear usuario (la contraseña se almacena HASHEADA con bcrypt)
+ - PUT  /users/{usuario}/password -> actualizar contraseña (se aplica bcrypt)
 """
 
 from fastapi import FastAPI, HTTPException, Header
@@ -48,6 +47,16 @@ class LoginModel(BaseModel):
     usuario: str
     password: str
 
+class CreateUserModel(BaseModel):
+    usuario: str
+    password: str
+    id_rol: int = 2        # valor por defecto (por ejemplo Colaborador1), ajusta según tu esquema
+    id_personal: int | None = None
+    is_active: int = 1
+
+class UpdatePasswordModel(BaseModel):
+    new_password: str
+
 # JWT
 SECRET_KEY = "mi_clave_ultra_secreta_1234567890"  # en prod usar ENV
 ALGORITHM = "HS256"
@@ -60,12 +69,10 @@ def get_db_conn():
     Si falla lanza HTTPException con status 503.
     """
     try:
-        # connection_timeout evita bloqueos largos
         conn = mysql.connector.connect(**db_config, connection_timeout=5)
         return conn
     except MySQLError as e:
         logger.exception("Fallo al conectar a la base de datos")
-        # Mensaje amigable en español para que el frontend lo muestre
         raise HTTPException(status_code=503, detail=f"No hay conexión con el servidor de base de datos: {e}")
 
 def _bytes_from_col(val):
@@ -81,6 +88,14 @@ def _bytes_from_col(val):
     # fallback: str
     return str(val).encode('utf-8')
 
+# Utilitario de hashing (bcrypt)
+def hash_password_plain(plain: str, rounds: int = 12) -> str:
+    """Retorna hash bcrypt (string) para la contraseña en texto plano."""
+    if plain is None:
+        raise ValueError("password no puede ser None")
+    hashed = bcrypt.hashpw(plain.encode('utf-8'), bcrypt.gensalt(rounds))
+    return hashed.decode('utf-8')
+
 # Obtener nombre de rol (nuestro esquema guarda id_rol en usuario)
 def get_role_name(conn, id_rol):
     cur = conn.cursor()
@@ -92,20 +107,97 @@ def get_role_name(conn, id_rol):
         try: cur.close()
         except: pass
 
-# LOGIN
+# ----------------- ENDPOINT: crear usuario (aplica hash automaticamente) -----------------
+@app.post("/users", status_code=201)
+def create_user(payload: CreateUserModel):
+    """
+    Crea un usuario en la tabla 'usuario'. La contraseña se guarda con bcrypt automáticamente.
+    Campos esperados: usuario, password, id_rol, id_personal (opcional), is_active
+    """
+    conn = None
+    cur = None
+    try:
+        conn = get_db_conn()
+        cur = conn.cursor(dictionary=True)
+
+        # Verificar si usuario ya existe
+        cur.execute("SELECT id FROM usuario WHERE usuario = %s", (payload.usuario,))
+        if cur.fetchone():
+            raise HTTPException(status_code=409, detail="Usuario ya existe")
+
+        # Generar hash bcrypt
+        hashed = hash_password_plain(payload.password, rounds=12)
+
+        # Insertar usuario (uso columnas: usuario, clave, fecha_creacion, id_rol, id_personal, is_active, created_at, updated_at)
+        insert_sql = """
+            INSERT INTO usuario (usuario, clave, fecha_creacion, id_rol, id_personal, is_active, created_at, updated_at)
+            VALUES (%s, %s, NOW(), %s, %s, %s, NOW(), NOW())
+        """
+        cur.execute(insert_sql, (payload.usuario, hashed, payload.id_rol, payload.id_personal, payload.is_active))
+        conn.commit()
+        return {"message": "Usuario creado correctamente", "usuario": payload.usuario}
+    except HTTPException:
+        raise
+    except MySQLError as e:
+        logger.exception("Error creando usuario")
+        raise HTTPException(status_code=500, detail=f"Error creando usuario: {e}")
+    finally:
+        if cur:
+            try: cur.close()
+            except: pass
+        if conn:
+            try: conn.close()
+            except: pass
+
+# ----------------- ENDPOINT: actualizar contraseña (aplica hash automaticamente) -----------------
+@app.put("/users/{username}/password")
+def update_user_password(username: str, payload: UpdatePasswordModel):
+    """
+    Actualiza la contraseña del usuario indicado y la guarda con bcrypt.
+    """
+    conn = None
+    cur = None
+    try:
+        conn = get_db_conn()
+        cur = conn.cursor(dictionary=True)
+
+        # Comprobar existencia
+        cur.execute("SELECT id FROM usuario WHERE usuario = %s", (username,))
+        r = cur.fetchone()
+        if not r:
+            raise HTTPException(status_code=404, detail="Usuario no encontrado")
+
+        # Generar hash y actualizar
+        hashed = hash_password_plain(payload.new_password, rounds=12)
+        cur2 = conn.cursor()
+        cur2.execute("UPDATE usuario SET clave = %s, updated_at = NOW() WHERE usuario = %s", (hashed, username))
+        conn.commit()
+        cur2.close()
+        return {"message": "Contraseña actualizada correctamente"}
+    except HTTPException:
+        raise
+    except MySQLError as e:
+        logger.exception("Error actualizando contraseña")
+        raise HTTPException(status_code=500, detail=f"Error actualizando contraseña: {e}")
+    finally:
+        if cur:
+            try: cur.close()
+            except: pass
+        if conn:
+            try: conn.close()
+            except: pass
+
+# ----------------- LOGIN (sin cambios funcionales) -----------------
 @app.post("/login")
 def login(data: LoginModel):
     conn = None
     cur = None
     try:
-        # intento conectar (si falla, get_db_conn lanza HTTPException 503)
         conn = get_db_conn()
         cur = conn.cursor(dictionary=True)
         cur.execute("SELECT id, usuario, clave, id_rol, is_active FROM usuario WHERE usuario = %s", (data.usuario,))
         user = cur.fetchone()
-
         if not user:
-            # 401 para credenciales inválidas — mensaje claro
             raise HTTPException(status_code=401, detail="Usuario no existe")
 
         if user.get("is_active") is not None and int(user.get("is_active")) == 0:
@@ -132,7 +224,6 @@ def login(data: LoginModel):
         if not password_ok:
             raise HTTPException(status_code=401, detail="Contraseña incorrecta")
 
-        # autenticación exitosa -> obtenemos rol
         roles = []
         try:
             role_name = None
@@ -154,14 +245,11 @@ def login(data: LoginModel):
         return {"access_token": token, "token_type": "bearer"}
 
     except HTTPException:
-        # Re-lanzar HTTPException tal cual (401, 503, etc.)
         raise
     except MySQLError as e:
-        # si ocurre un error DB más abajo, devolver 503
         logger.exception("MySQL error en login")
         raise HTTPException(status_code=503, detail=f"No hay conexión con el servidor de base de datos: {e}")
     except Exception as e:
-        # Error inesperado
         logger.exception("Error inesperado en /login")
         raise HTTPException(status_code=500, detail="Error interno del servidor")
     finally:
@@ -198,6 +286,7 @@ def whoami(authorization: str = Header(None)):
 @app.get("/")
 def root():
     return {"message": "UDH2024 backend - auth listo"}
+
 
 
 
