@@ -11,6 +11,7 @@ const LoginForm = () => {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
@@ -20,6 +21,7 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
         try {
             const response = await fetch('http://127.0.0.1:8000/login', {
@@ -28,26 +30,48 @@ const LoginForm = () => {
                 body: JSON.stringify({ usuario, password })
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem('token', data.access_token);
+            // Leer la respuesta como texto primero y luego intentar parsear JSON
+            const text = await response.text();
+            let payload = null;
+            try { payload = JSON.parse(text); } catch (err) { payload = null; }
+
+            if (response.ok && payload && payload.access_token) {
+                // Login exitoso
+                localStorage.setItem('token', payload.access_token);
                 navigate('/admin');
                 return;
             }
 
-            // Si no OK, intentar leer JSON de error
-            let errDetail = 'Usuario o contraseña incorrectos';
-            try {
-                const errJson = await response.json();
-                errDetail = errJson.detail || errDetail;
-            } catch (parseErr) {
-                // si no es JSON dejamos el mensaje por defecto
+            // Manejo de errores por código HTTP y detalle enviado por backend
+            let message = 'Usuario o contraseña incorrectos';
+            if (response.status === 401) {
+                // 401: usuario no existe o contraseña incorrecta
+                if (payload && payload.detail) message = payload.detail;
+                alert(message);
+                setError(message);
+            } else if (response.status === 503) {
+                // 503: problema con servidor/BD
+                if (payload && payload.detail) message = payload.detail;
+                else message = 'No hay conexión con el servidor';
+                alert(message);
+                setError(message);
+            } else if (response.status === 500) {
+                message = (payload && payload.detail) ? payload.detail : 'Error interno del servidor';
+                alert(message);
+                setError(message);
+            } else {
+                // Otros estados (400, etc.)
+                message = (payload && payload.detail) ? payload.detail : `Error: ${response.status}`;
+                alert(message);
+                setError(message);
             }
-            setError(errDetail);
-
         } catch (err) {
             console.error('Fetch error:', err);
-            setError('Error de conexión con el servidor');
+            const msg = 'Error de conexión con el servidor';
+            alert(msg);
+            setError(msg);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -96,6 +120,7 @@ const LoginForm = () => {
                                 value={usuario}
                                 onChange={(e) => setUsuario(e.target.value)}
                                 required
+                                autoComplete="username"
                             />
                             <FaUser className="icon" />
                         </div>
@@ -107,18 +132,23 @@ const LoginForm = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                autoComplete="current-password"
                             />
                             <FaLock className="icon" />
                             <span
                                 className="eye-icon"
                                 onClick={togglePasswordVisibility}
                                 title={showPassword ? "Ocultar" : "Mostrar"}
+                                role="button"
+                                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
                         </div>
 
-                        <button type="submit">Iniciar Sesión</button>
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'Iniciando...' : 'Iniciar Sesión'}
+                        </button>
                     </form>
                 </div>
             </div>
@@ -127,6 +157,7 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
 
 
 
