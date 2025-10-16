@@ -1,3 +1,8 @@
+/* RegPersonalPage.css
+   estilos para el panel de "Crear Usuario" y el input file.
+   Las variables de dark-mode se conservan.
+*/
+
 .regpersonal-page {
   padding: 20px;
   background: var(--page-bg);
@@ -21,7 +26,8 @@
   background: var(--form-bg);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  transition: box-shadow 0.25s ease, transform 0.12s ease;
 }
 
 .form-grid {
@@ -39,21 +45,63 @@
   font-weight: 600;
   margin-bottom: 6px;
   color: var(--label-color);
+  font-size: 14px;
 }
 
-.form-group input {
+.form-group input,
+.form-group select,
+.form-group textarea {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.2s;
   background: var(--input-bg);
   color: var(--text-color);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
   border-color: #3498db;
   outline: none;
+  box-shadow: 0 4px 14px rgba(52,152,219,0.08);
+}
+
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #999 50%),
+                    linear-gradient(135deg, #999 50%, transparent 50%),
+                    linear-gradient(to right, #ddd, #ddd);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), 100% 0;
+  background-size: 6px 6px, 6px 6px, 1px 1.5em;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--subtitle-color);
+  margin-top: 6px;
+}
+
+.form-message {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.form-message.success {
+  background: rgba(39,174,96,0.08);
+  color: #27ae60;
+  border: 1px solid rgba(39,174,96,0.12);
+}
+.form-message.error {
+  background: rgba(231,76,60,0.06);
+  color: #e74c3c;
+  border: 1px solid rgba(231,76,60,0.12);
 }
 
 .form-actions {
@@ -71,11 +119,13 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.08s;
+  box-shadow: 0 6px 18px rgba(39,174,96,0.12);
 }
 
 .btn-guardar:hover {
   background: #219150;
+  transform: translateY(-1px);
 }
 
 .btn-cancelar {
@@ -86,14 +136,78 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.08s;
+  box-shadow: 0 6px 18px rgba(231,76,60,0.08);
 }
 
 .btn-cancelar:hover {
   background: #c0392b;
+  transform: translateY(-1px);
 }
 
-/* Variables para modo día/noche */
+.btn-outline {
+  background: transparent;
+  color: var(--text-color);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #dfe6e9;
+  cursor: pointer;
+}
+
+.create-user-panel {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border: 1px solid rgba(52,73,94,0.06);
+  display: block;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.04);
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.create-user-panel h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: var(--label-color);
+}
+
+.form-group input[type="file"] {
+  padding: 8px 10px;
+}
+
+.upload-progress {
+  height: 8px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.upload-progress > i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  transition: width 0.3s ease;
+  border-radius: 6px;
+}
+
+@media (max-width: 780px) {
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-guardar, .btn-cancelar, .btn-outline {
+    width: 100%;
+  }
+}
+
 :root {
   --page-bg: #f9fafb;
   --form-bg: #fff;
@@ -111,4 +225,6 @@ body.dark-mode {
   --label-color: #ddd;
   --input-bg: #3a3a4a;
 }
+
+
 
