@@ -1,34 +1,47 @@
-# Backend/hash_password.py
+# Backend/hash_passwords.py
 """
 Script para convertir contraseñas en texto plano a bcrypt en la tabla 'usuario'.
-Recomendado ejecutar como módulo desde la raíz del proyecto:
-    python -m Backend.hash_password
+Se puede ejecutar de dos formas:
+  1) Como módulo (recomendado): python -m Backend.hash_password
+  2) Directamente por ruta (esta versión soporta esto): python Backend\hash_passwords.py
 
 El script:
  - Encuentra usuarios cuya columna 'clave' NO comienza con '$2'
  - Genera bcrypt (cost 12) y actualiza la fila correspondiente
  - Muestra resumen
-
-Además exporta la función make_bcrypt_hash(password) para generar hashes desde otros módulos.
 """
 
-from .db_config import db_config
+import os
+import sys
+
+# ------------------------------------------------------
+# Permitir que este script funcione tanto si se ejecuta:
+#  - como módulo (python -m Backend.hash_password)
+#  - como script directo (python Backend\hash_passwords.py)
+# Solución: asegúrate de que el directorio que contiene db_config.py
+# esté en sys.path y luego hacer import normal.
+# ------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Asegurarnos de que el propio folder Backend esté en sys.path
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
+try:
+    # intento la importación normal (cuando se ejecuta como script directo)
+    from db_config import db_config
+except Exception:
+    # fallback: intento la importación relativa (cuando se ejecuta como módulo)
+    try:
+        from .db_config import db_config
+    except Exception as e:
+        raise ImportError("No se pudo importar db_config. Asegúrate de ejecutar desde la raíz del proyecto o usar -m.") from e
+
 import mysql.connector
 import bcrypt
 from mysql.connector import Error as MySQLError
 
 def get_conn():
     return mysql.connector.connect(**db_config)
-
-def make_bcrypt_hash(password_plain: str, rounds: int = 12) -> str:
-    """
-    Genera un hash bcrypt (como string) a partir de la contraseña en texto plano.
-    rounds: coste (12 es razonable para pruebas/producción moderada).
-    """
-    if password_plain is None:
-        raise ValueError("password_plain no puede ser None")
-    hashed = bcrypt.hashpw(password_plain.encode('utf-8'), bcrypt.gensalt(rounds))
-    return hashed.decode('utf-8')
 
 def is_bcrypt_hash(s):
     if not s:
@@ -81,7 +94,7 @@ def main():
         print(f"Se actualizarán {len(to_update)} usuarios a bcrypt.")
         for uid, username, plain in to_update:
             hashed = bcrypt.hashpw(plain.encode('utf-8'), bcrypt.gensalt(12))
-            # Actualizar (guardamos como bytes o string; decodificamos a string para consistencia)
+            # Actualizar (guardamos como string para compatibilidad)
             cur2 = conn.cursor()
             cur2.execute("UPDATE usuario SET clave = %s, updated_at = NOW() WHERE id = %s", (hashed.decode('utf-8'), uid))
             conn.commit()
@@ -101,6 +114,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
