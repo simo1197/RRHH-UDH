@@ -1,4 +1,8 @@
 // Frontend/src/Components/LoginForm/LoginForm.jsx
+// Actualizado por mí: uso de la URL del backend desde env, envio de "clave" (no "password"),
+// manejo de la respuesta del backend (id, usuario, id_rol, id_personal) y guardado en localStorage.
+// Hice solo los cambios necesarios — no toqué estilos ni la lógica visual.
+
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa6";
@@ -6,7 +10,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import imgLogo from '../../Assets/udhogobco.png';
 import { useNavigate } from 'react-router-dom';
 
+// Leo la base API desde las variables de entorno (si no existe, uso la local por defecto)
+const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000/api";
+
 const LoginForm = () => {
+    // Estados del componente
     const [showPassword, setShowPassword] = useState(false);
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
@@ -14,30 +22,43 @@ const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    // Alterno visibilidad de contraseña
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // Manejo del submit del form
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/login', {
+            // Envío la clave con la clave "clave" porque el backend espera { usuario, clave }
+            const response = await fetch(`${API_BASE}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ usuario, password })
+                body: JSON.stringify({ usuario, clave: password })
             });
 
-            // Leer la respuesta como texto primero y luego intentar parsear JSON
+            // Leo respuesta como texto y luego intento parsear JSON (manejo robusto)
             const text = await response.text();
             let payload = null;
-            try { payload = JSON.parse(text); } catch (err) { payload = null; }
+            try { payload = text ? JSON.parse(text) : null; } catch (err) { payload = null; }
 
-            if (response.ok && payload && payload.access_token) {
-                // Login exitoso
-                localStorage.setItem('token', payload.access_token);
+            // Si OK => backend devolvió datos del usuario (id, usuario, id_rol, id_personal)
+            if (response.ok && payload && payload.usuario) {
+                // Guardo en localStorage el usuario actual (puedes cambiar a sessionStorage si prefieres)
+                // Guardaré sólo datos no sensibles devueltos por el backend.
+                const userToStore = {
+                    id: payload.id,
+                    usuario: payload.usuario,
+                    id_rol: payload.id_rol,
+                    id_personal: payload.id_personal
+                };
+                localStorage.setItem('currentUser', JSON.stringify(userToStore));
+
+                // Redirijo al panel de admin (igual que antes)
                 navigate('/admin');
                 return;
             }
@@ -45,12 +66,16 @@ const LoginForm = () => {
             // Manejo de errores por código HTTP y detalle enviado por backend
             let message = 'Usuario o contraseña incorrectos';
             if (response.status === 401) {
-                // 401: usuario no existe o contraseña incorrecta
                 if (payload && payload.detail) message = payload.detail;
                 alert(message);
                 setError(message);
+            } else if (response.status === 404) {
+                // Usuario no encontrado
+                if (payload && payload.detail) message = payload.detail;
+                else message = 'Usuario no encontrado';
+                alert(message);
+                setError(message);
             } else if (response.status === 503) {
-                // 503: problema con servidor/BD
                 if (payload && payload.detail) message = payload.detail;
                 else message = 'No hay conexión con el servidor';
                 alert(message);
@@ -66,6 +91,7 @@ const LoginForm = () => {
                 setError(message);
             }
         } catch (err) {
+            // Capturo fallos de conexión / excepciones de fetch
             console.error('Fetch error:', err);
             const msg = 'Error de conexión con el servidor';
             alert(msg);
@@ -157,6 +183,7 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
 
 
 
